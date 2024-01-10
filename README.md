@@ -1,4 +1,4 @@
-# WorkLoad Optimize SOC (WLOS) Baseline
+# SoC final project
 
 ### Simulation for system
 ```sh
