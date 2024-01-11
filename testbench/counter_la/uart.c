@@ -81,7 +81,7 @@ int __attribute__ ( ( section ( ".mprjram" ) ) ) firfilter(int inputsample){
 
 int* __attribute__ ( ( section ( ".mprjram" ) ) ) fir(){
 	initfir();
-	for(int i=0; i<N; i++){
+	for(int i=0; i<M; i++){
 		outputsignal[i] = firfilter(inputsignal[i]);
 	}
 	return outputsignal;

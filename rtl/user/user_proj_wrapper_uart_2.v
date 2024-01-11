@@ -200,6 +200,8 @@ uart uart (
         end
     end
     
+
+
     bram user_bram (
         .CLK(clk),
         .WE0(wstrb),
@@ -209,5 +211,6 @@ uart uart (
         .A0(wbs_adr_i)
     );
 endmodule	// user_project_wrapper
+
 
 `default_nettype wire
