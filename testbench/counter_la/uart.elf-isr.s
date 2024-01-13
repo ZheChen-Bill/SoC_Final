@@ -52,9 +52,7 @@ isr:
 	andi	a5,a5,4
 .LVL3:
 	.loc 1 37 8
-	bne	a5,zero,.L8
-	ret
-.L8:
+	beq	a5,zero,.L1
 	.loc 1 38 9 is_stmt 1
 .LVL4:
 .LBB16:
@@ -98,28 +96,30 @@ isr:
 	.loc 1 40 9 is_stmt 1
 	.loc 1 40 11 is_stmt 0
 	li	a5,10
-	beq	a0,a5,.L9
-	.loc 1 44 13 is_stmt 1
+	bne	a0,a5,.L3
+	.loc 1 41 13 is_stmt 1
 	.loc 1 51 1 is_stmt 0
 	lw	ra,12(sp)
 	.cfi_remember_state
 	.cfi_restore 1
 	addi	sp,sp,16
 	.cfi_def_cfa_offset 0
-	.loc 1 44 13
-	tail	uart_write
+	.loc 1 41 13
+	tail	uart_end
 .LVL7:
-.L9:
+.L3:
 	.cfi_restore_state
-	.loc 1 41 13 is_stmt 1
+	.loc 1 44 13 is_stmt 1
 	.loc 1 51 1 is_stmt 0
 	lw	ra,12(sp)
 	.cfi_restore 1
 	addi	sp,sp,16
 	.cfi_def_cfa_offset 0
-	.loc 1 41 13
-	tail	uart_end
+	.loc 1 44 13
+	tail	uart_write
 .LVL8:
+.L1:
+	ret
 	.cfi_endproc
 .LFE321:
 	.size	isr, .-isr
@@ -298,10 +298,10 @@ counter:
 	.4byte	0xa8
 	.byte	0x7
 	.4byte	.LVL7
-	.4byte	0x8a
+	.4byte	0x9a
 	.byte	0x7
 	.4byte	.LVL8
-	.4byte	0x9a
+	.4byte	0x8a
 	.byte	0
 	.byte	0x8
 	.4byte	.LASF14
@@ -841,8 +841,6 @@ counter:
 	.string	"uart_read"
 .LASF20:
 	.string	"counter"
-.LASF18:
-	.string	"GNU C17 12.1.0 -mabi=ilp32 -mtune=rocket -misa-spec=2.2 -march=rv32i -g -O2 -ffreestanding"
 .LASF6:
 	.string	"unsigned char"
 .LASF21:
@@ -855,6 +853,8 @@ counter:
 	.string	"irq_getmask"
 .LASF10:
 	.string	"unsigned int"
+.LASF18:
+	.string	"GNU C17 12.1.0 -mabi=ilp32 -mtune=rocket -misa-spec=2.2 -march=rv32i -g -Os -ffreestanding"
 .LASF9:
 	.string	"long long unsigned int"
 .LASF5:

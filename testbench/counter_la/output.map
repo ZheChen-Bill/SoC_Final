@@ -34,29 +34,29 @@ Linker script and memory map
  .text          0x0000000010000198        0x0 uart.elf-uart.o
  .text          0x0000000010000198        0x0 uart.elf-counter_la_uart.o
 
-.mprj           0x0000000010000198      0x110
- .mprj          0x0000000010000198      0x110 uart.elf-uart.o
+.mprj           0x0000000010000198      0x100
+ .mprj          0x0000000010000198      0x100 uart.elf-uart.o
                 0x0000000010000198                uart_end
                 0x00000000100001a4                uart_write
                 0x00000000100001bc                uart_write_char
-                0x00000000100001f8                uart_write_string
-                0x0000000010000244                uart_read_char
-                0x0000000010000274                uart_read
+                0x0000000010000200                uart_write_string
+                0x0000000010000234                uart_read_char
+                0x0000000010000264                uart_read
 
-.text.startup   0x00000000100002a8      0x274
- .text.startup  0x00000000100002a8      0x274 uart.elf-counter_la_uart.o
-                0x00000000100002a8                main
+.text.startup   0x0000000010000298      0x274
+ .text.startup  0x0000000010000298      0x274 uart.elf-counter_la_uart.o
+                0x0000000010000298                main
 
-.rodata         0x000000001000051c        0x4
-                0x0000000010000520                . = ALIGN (0x8)
- *fill*         0x000000001000051c        0x4 
-                0x0000000010000520                _frodata = .
+.rodata         0x000000001000050c        0x4
+                0x0000000010000510                . = ALIGN (0x8)
+ *fill*         0x000000001000050c        0x4 
+                0x0000000010000510                _frodata = .
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  *(.rodata1)
-                0x0000000010000520                . = ALIGN (0x8)
-                0x0000000010000520                _erodata = .
+                0x0000000010000510                . = ALIGN (0x8)
+                0x0000000010000510                _erodata = .
 
-.data           0x0000000000000000      0x1e0 load address 0x0000000010000520
+.data           0x0000000000000000      0x1e0 load address 0x0000000010000510
                 0x0000000000000000                . = ALIGN (0x8)
                 0x0000000000000000                _fdata = .
  *(.data .data.* .gnu.linkonce.d.*)
@@ -81,7 +81,7 @@ Linker script and memory map
  *fill*         0x00000000000001dc        0x4 
                 0x00000000000001e0                _edata = .
 
-.bss            0x00000000000001e0      0x170 load address 0x0000000010000700
+.bss            0x00000000000001e0      0x170 load address 0x00000000100006f0
                 0x00000000000001e0                . = ALIGN (0x8)
                 0x00000000000001e0                _fbss = .
  *(.dynsbss)
@@ -103,26 +103,26 @@ Linker script and memory map
                 0x0000000000000350                _ebss = .
                 0x0000000000000350                _end = .
 
-.mprjram        0x0000000038000000      0x574 load address 0x0000000010000700
+.mprjram        0x0000000038000000      0x340 load address 0x00000000100006f0
                 0x0000000038000000                . = ALIGN (0x8)
                 0x0000000038000000                _fsram = .
  *libgcc.a:*(.text .text.*)
  .text          0x0000000038000000       0x24 /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a(muldi3.o)
                 0x0000000038000000                __mulsi3
- .mprjram       0x0000000038000024      0x550 uart.elf-uart.o
+ .mprjram       0x0000000038000024      0x31c uart.elf-uart.o
                 0x0000000038000024                initfir
-                0x0000000038000048                firfilter
-                0x00000000380000d0                fir
-                0x00000000380001e0                matmul
-                0x00000000380002d8                partition
-                0x0000000038000354                sort
-                0x000000003800051c                qsort
-                0x0000000038000570                check
+                0x0000000038000050                firfilter
+                0x00000000380000e4                fir
+                0x000000003800014c                matmul
+                0x0000000038000248                partition
+                0x00000000380002bc                sort
+                0x0000000038000318                qsort
+                0x000000003800033c                check
                 0x0000000000000600                PROVIDE (_fstack = (ORIGIN (dff2) + LENGTH (dff2)))
-                0x0000000010000520                PROVIDE (_fdata_rom = LOADADDR (.data))
+                0x0000000010000510                PROVIDE (_fdata_rom = LOADADDR (.data))
                 [!provide]                        PROVIDE (_edata_rom = (LOADADDR (.data) + SIZEOF (.data)))
-                0x0000000038000574                PROVIDE (_esram = (ORIGIN (mprjram) + SIZEOF (.mprjram)))
-                0x0000000010000700                PROVIDE (_esram_rom = LOADADDR (.mprjram))
+                0x0000000038000340                PROVIDE (_esram = (ORIGIN (mprjram) + SIZEOF (.mprjram)))
+                0x00000000100006f0                PROVIDE (_esram_rom = LOADADDR (.mprjram))
 LOAD uart.elf-crt0_vex.o
 LOAD uart.elf-isr.o
 LOAD uart.elf-uart.o
@@ -135,8 +135,8 @@ END GROUP
 LOAD /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a
 OUTPUT(uart.elf elf32-littleriscv)
 
-.rela.dyn       0x0000000038000574        0x0 load address 0x0000000010000c74
- .rela.text     0x0000000038000574        0x0 uart.elf-crt0_vex.o
+.rela.dyn       0x0000000038000340        0x0 load address 0x0000000010000a30
+ .rela.text     0x0000000038000340        0x0 uart.elf-crt0_vex.o
 
 .riscv.attributes
                 0x0000000000000000       0x20
@@ -157,12 +157,12 @@ OUTPUT(uart.elf elf32-littleriscv)
  .comment       0x000000000000001b       0x1c uart.elf-uart.o
  .comment       0x000000000000001b       0x1c uart.elf-counter_la_uart.o
 
-.debug_line     0x0000000000000000     0x1859
+.debug_line     0x0000000000000000     0x13f1
  .debug_line    0x0000000000000000      0x20a uart.elf-crt0_vex.o
  .debug_line    0x000000000000020a      0x15f uart.elf-isr.o
- .debug_line    0x0000000000000369      0xca6 uart.elf-uart.o
- .debug_line    0x000000000000100f      0x7d0 uart.elf-counter_la_uart.o
- .debug_line    0x00000000000017df       0x7a /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a(muldi3.o)
+ .debug_line    0x0000000000000369      0x8ee uart.elf-uart.o
+ .debug_line    0x0000000000000c57      0x720 uart.elf-counter_la_uart.o
+ .debug_line    0x0000000000001377       0x7a /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a(muldi3.o)
 
 .debug_line_str
                 0x0000000000000000      0x17f
@@ -180,19 +180,19 @@ OUTPUT(uart.elf elf32-littleriscv)
  .debug_line_str
                 0x00000000000000eb       0x94 /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a(muldi3.o)
 
-.debug_info     0x0000000000000000      0xcf7
+.debug_info     0x0000000000000000      0x917
  .debug_info    0x0000000000000000       0x25 uart.elf-crt0_vex.o
  .debug_info    0x0000000000000025      0x1e3 uart.elf-isr.o
- .debug_info    0x0000000000000208      0x8c3 uart.elf-uart.o
- .debug_info    0x0000000000000acb      0x1fd uart.elf-counter_la_uart.o
- .debug_info    0x0000000000000cc8       0x2f /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a(muldi3.o)
+ .debug_info    0x0000000000000208      0x4e3 uart.elf-uart.o
+ .debug_info    0x00000000000006eb      0x1fd uart.elf-counter_la_uart.o
+ .debug_info    0x00000000000008e8       0x2f /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a(muldi3.o)
 
-.debug_abbrev   0x0000000000000000      0x625
+.debug_abbrev   0x0000000000000000      0x551
  .debug_abbrev  0x0000000000000000       0x14 uart.elf-crt0_vex.o
  .debug_abbrev  0x0000000000000014      0x183 uart.elf-isr.o
- .debug_abbrev  0x0000000000000197      0x2e4 uart.elf-uart.o
- .debug_abbrev  0x000000000000047b      0x189 uart.elf-counter_la_uart.o
- .debug_abbrev  0x0000000000000604       0x21 /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a(muldi3.o)
+ .debug_abbrev  0x0000000000000197      0x210 uart.elf-uart.o
+ .debug_abbrev  0x00000000000003a7      0x189 uart.elf-counter_la_uart.o
+ .debug_abbrev  0x0000000000000530       0x21 /opt/riscv/lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a(muldi3.o)
 
 .debug_aranges  0x0000000000000000      0x108
  .debug_aranges
@@ -218,24 +218,24 @@ OUTPUT(uart.elf elf32-littleriscv)
                                          0xa9 (size before relaxing)
 
 .debug_loclists
-                0x0000000000000000      0x529
+                0x0000000000000000      0x323
  .debug_loclists
                 0x0000000000000000       0x5d uart.elf-isr.o
  .debug_loclists
-                0x000000000000005d      0x44a uart.elf-uart.o
+                0x000000000000005d      0x244 uart.elf-uart.o
  .debug_loclists
-                0x00000000000004a7       0x82 uart.elf-counter_la_uart.o
+                0x00000000000002a1       0x82 uart.elf-counter_la_uart.o
 
 .debug_rnglists
-                0x0000000000000000      0x157
+                0x0000000000000000      0x11e
  .debug_rnglists
                 0x0000000000000000       0x28 uart.elf-isr.o
  .debug_rnglists
-                0x0000000000000028      0x119 uart.elf-uart.o
+                0x0000000000000028       0xe0 uart.elf-uart.o
  .debug_rnglists
-                0x0000000000000141       0x16 uart.elf-counter_la_uart.o
+                0x0000000000000108       0x16 uart.elf-counter_la_uart.o
 
-.debug_frame    0x0000000000000000      0x24c
+.debug_frame    0x0000000000000000      0x21c
  .debug_frame   0x0000000000000000       0x34 uart.elf-isr.o
- .debug_frame   0x0000000000000034      0x1e4 uart.elf-uart.o
- .debug_frame   0x0000000000000218       0x34 uart.elf-counter_la_uart.o
+ .debug_frame   0x0000000000000034      0x1b4 uart.elf-uart.o
+ .debug_frame   0x00000000000001e8       0x34 uart.elf-counter_la_uart.o

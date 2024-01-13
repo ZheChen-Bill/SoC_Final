@@ -27,17 +27,15 @@ main:
 	.cfi_offset 1, -4
 	.loc 1 81 53
 	li	a2,1
+	li	a5,-268419072
 	.loc 1 83 39
 	li	a3,8192
+	addi	a4,a3,-2039
 	.loc 1 81 53
-	li	a4,-268419072
-	.loc 1 83 39
-	li	a5,637534208
-	.loc 1 81 53
-	sw	a2,-2048(a4)
+	sw	a2,-2048(a5)
 	.loc 1 83 5 is_stmt 1
 	.loc 1 83 39 is_stmt 0
-	addi	a4,a3,-2039
+	li	a5,637534208
 	sw	a4,160(a5)
 	.loc 1 84 5 is_stmt 1
 	.loc 1 84 39 is_stmt 0
@@ -136,12 +134,12 @@ main:
 	li	a4,1026
 	sw	a4,56(a5)
 	.loc 1 120 2 is_stmt 1
-	.loc 1 121 10 is_stmt 0
-	li	s0,637534208
-	.loc 1 120 36
+	.loc 1 120 36 is_stmt 0
 	sw	a2,0(a5)
 	.loc 1 121 2 is_stmt 1
-	.loc 1 121 43 is_stmt 0
+	.loc 1 121 10 is_stmt 0
+	li	s0,637534208
+	.loc 1 121 43
 	li	a4,1
 .L2:
 	.loc 1 121 43 is_stmt 1 discriminator 1
@@ -235,78 +233,67 @@ main:
 .LVL5:
 	.loc 1 168 2 is_stmt 1
 	.loc 1 168 43 is_stmt 0
-	lw	a3,0(a0)
-	.loc 1 169 47
-	lw	a4,4(a0)
-	.loc 1 170 47
-	lw	a5,8(a0)
-	.loc 1 171 47
-	lw	a2,12(a0)
-	.loc 1 168 43
-	slli	a3,a3,16
+	lw	a5,0(a0)
+	slli	a5,a5,16
 	.loc 1 168 36
-	sw	a3,12(s0)
+	sw	a5,12(s0)
 	.loc 1 169 2 is_stmt 1
 	.loc 1 169 47 is_stmt 0
-	slli	a4,a4,16
-	.loc 1 172 47
-	lw	a3,16(a0)
-	.loc 1 170 47
+	lw	a5,4(a0)
 	slli	a5,a5,16
 	.loc 1 169 36
-	sw	a4,12(s0)
+	sw	a5,12(s0)
 	.loc 1 170 2 is_stmt 1
-	.loc 1 173 47 is_stmt 0
-	lw	a4,20(a0)
-	.loc 1 171 47
-	slli	a2,a2,16
+	.loc 1 170 47 is_stmt 0
+	lw	a5,8(a0)
+	slli	a5,a5,16
 	.loc 1 170 36
 	sw	a5,12(s0)
 	.loc 1 171 2 is_stmt 1
-	.loc 1 174 47 is_stmt 0
-	lw	a5,24(a0)
-	.loc 1 172 47
-	slli	a3,a3,16
+	.loc 1 171 47 is_stmt 0
+	lw	a5,12(a0)
+	slli	a5,a5,16
 	.loc 1 171 36
-	sw	a2,12(s0)
+	sw	a5,12(s0)
 	.loc 1 172 2 is_stmt 1
-	.loc 1 175 47 is_stmt 0
-	lw	a2,28(a0)
-	.loc 1 173 47
-	slli	a4,a4,16
+	.loc 1 172 47 is_stmt 0
+	lw	a5,16(a0)
+	slli	a5,a5,16
 	.loc 1 172 36
-	sw	a3,12(s0)
+	sw	a5,12(s0)
 	.loc 1 173 2 is_stmt 1
-	.loc 1 176 47 is_stmt 0
-	lw	a3,32(a0)
-	.loc 1 174 47
+	.loc 1 173 47 is_stmt 0
+	lw	a5,20(a0)
 	slli	a5,a5,16
 	.loc 1 173 36
-	sw	a4,12(s0)
+	sw	a5,12(s0)
 	.loc 1 174 2 is_stmt 1
-	.loc 1 177 47 is_stmt 0
-	lw	a4,36(a0)
-	.loc 1 175 47
-	slli	a2,a2,16
+	.loc 1 174 47 is_stmt 0
+	lw	a5,24(a0)
+	slli	a5,a5,16
 	.loc 1 174 36
 	sw	a5,12(s0)
 	.loc 1 175 2 is_stmt 1
-	.loc 1 178 48 is_stmt 0
-	lw	a5,40(a0)
-	.loc 1 176 47
-	slli	a3,a3,16
+	.loc 1 175 47 is_stmt 0
+	lw	a5,28(a0)
+	slli	a5,a5,16
 	.loc 1 175 36
-	sw	a2,12(s0)
+	sw	a5,12(s0)
 	.loc 1 176 2 is_stmt 1
-	.loc 1 176 36 is_stmt 0
-	sw	a3,12(s0)
+	.loc 1 176 47 is_stmt 0
+	lw	a5,32(a0)
+	slli	a5,a5,16
+	.loc 1 176 36
+	sw	a5,12(s0)
 	.loc 1 177 2 is_stmt 1
 	.loc 1 177 47 is_stmt 0
-	slli	a4,a4,16
+	lw	a5,36(a0)
+	slli	a5,a5,16
 	.loc 1 177 36
-	sw	a4,12(s0)
+	sw	a5,12(s0)
 	.loc 1 178 2 is_stmt 1
 	.loc 1 178 48 is_stmt 0
+	lw	a5,40(a0)
 	slli	a5,a5,16
 	.loc 1 178 36
 	sw	a5,12(s0)
@@ -316,29 +303,25 @@ main:
 .LVL6:
 	.loc 1 184 2 is_stmt 1
 	.loc 1 184 43 is_stmt 0
-	lw	a2,0(a0)
-	.loc 1 185 47
-	lw	a3,4(a0)
-	.loc 1 186 47
-	lw	a4,8(a0)
-	.loc 1 187 47
-	lw	a5,12(a0)
-	.loc 1 184 43
-	slli	a2,a2,16
+	lw	a5,0(a0)
+	slli	a5,a5,16
 	.loc 1 184 36
-	sw	a2,12(s0)
+	sw	a5,12(s0)
 	.loc 1 185 2 is_stmt 1
 	.loc 1 185 47 is_stmt 0
-	slli	a3,a3,16
+	lw	a5,4(a0)
+	slli	a5,a5,16
 	.loc 1 185 36
-	sw	a3,12(s0)
+	sw	a5,12(s0)
 	.loc 1 186 2 is_stmt 1
 	.loc 1 186 47 is_stmt 0
-	slli	a4,a4,16
+	lw	a5,8(a0)
+	slli	a5,a5,16
 	.loc 1 186 36
-	sw	a4,12(s0)
+	sw	a5,12(s0)
 	.loc 1 187 2 is_stmt 1
 	.loc 1 187 47 is_stmt 0
+	lw	a5,12(a0)
 	slli	a5,a5,16
 	.loc 1 187 36
 	sw	a5,12(s0)
@@ -348,71 +331,61 @@ main:
 .LVL7:
 	.loc 1 192 2 is_stmt 1
 	.loc 1 192 43 is_stmt 0
-	lw	a4,0(a0)
-	.loc 1 193 47
-	lw	a5,4(a0)
-	.loc 1 194 47
-	lw	a2,8(a0)
-	.loc 1 195 47
-	lw	a3,12(a0)
-	.loc 1 192 43
-	slli	a4,a4,16
+	lw	a5,0(a0)
+	slli	a5,a5,16
 	.loc 1 192 36
-	sw	a4,12(s0)
+	sw	a5,12(s0)
 	.loc 1 193 2 is_stmt 1
 	.loc 1 193 47 is_stmt 0
+	lw	a5,4(a0)
 	slli	a5,a5,16
-	.loc 1 196 47
-	lw	a4,16(a0)
-	.loc 1 194 47
-	slli	a2,a2,16
 	.loc 1 193 36
 	sw	a5,12(s0)
 	.loc 1 194 2 is_stmt 1
-	.loc 1 197 47 is_stmt 0
-	lw	a5,20(a0)
-	.loc 1 195 47
-	slli	a3,a3,16
+	.loc 1 194 47 is_stmt 0
+	lw	a5,8(a0)
+	slli	a5,a5,16
 	.loc 1 194 36
-	sw	a2,12(s0)
+	sw	a5,12(s0)
 	.loc 1 195 2 is_stmt 1
-	.loc 1 198 47 is_stmt 0
-	lw	a2,24(a0)
-	.loc 1 196 47
-	slli	a4,a4,16
+	.loc 1 195 47 is_stmt 0
+	lw	a5,12(a0)
+	slli	a5,a5,16
 	.loc 1 195 36
-	sw	a3,12(s0)
+	sw	a5,12(s0)
 	.loc 1 196 2 is_stmt 1
-	.loc 1 199 47 is_stmt 0
-	lw	a3,28(a0)
-	.loc 1 197 47
+	.loc 1 196 47 is_stmt 0
+	lw	a5,16(a0)
 	slli	a5,a5,16
 	.loc 1 196 36
-	sw	a4,12(s0)
+	sw	a5,12(s0)
 	.loc 1 197 2 is_stmt 1
-	.loc 1 200 47 is_stmt 0
-	lw	a4,32(a0)
-	.loc 1 198 47
-	slli	a2,a2,16
+	.loc 1 197 47 is_stmt 0
+	lw	a5,20(a0)
+	slli	a5,a5,16
 	.loc 1 197 36
 	sw	a5,12(s0)
 	.loc 1 198 2 is_stmt 1
-	.loc 1 201 47 is_stmt 0
-	lw	a5,36(a0)
-	.loc 1 199 47
-	slli	a3,a3,16
+	.loc 1 198 47 is_stmt 0
+	lw	a5,24(a0)
+	slli	a5,a5,16
 	.loc 1 198 36
-	sw	a2,12(s0)
+	sw	a5,12(s0)
 	.loc 1 199 2 is_stmt 1
-	.loc 1 199 36 is_stmt 0
-	sw	a3,12(s0)
+	.loc 1 199 47 is_stmt 0
+	lw	a5,28(a0)
+	slli	a5,a5,16
+	.loc 1 199 36
+	sw	a5,12(s0)
 	.loc 1 200 2 is_stmt 1
 	.loc 1 200 47 is_stmt 0
-	slli	a4,a4,16
+	lw	a5,32(a0)
+	slli	a5,a5,16
 	.loc 1 200 36
-	sw	a4,12(s0)
+	sw	a5,12(s0)
 	.loc 1 201 2 is_stmt 1
 	.loc 1 201 47 is_stmt 0
+	lw	a5,36(a0)
 	slli	a5,a5,16
 	.loc 1 201 36
 	sw	a5,12(s0)
@@ -1183,8 +1156,6 @@ main:
 	.string	"matmul"
 .LASF11:
 	.string	"qsort"
-.LASF16:
-	.string	"GNU C17 12.1.0 -mabi=ilp32 -mtune=rocket -misa-spec=2.2 -march=rv32i -g -O2 -ffreestanding"
 .LASF6:
 	.string	"unsigned char"
 .LASF8:
@@ -1199,6 +1170,8 @@ main:
 	.string	"irq_setmask"
 .LASF10:
 	.string	"unsigned int"
+.LASF16:
+	.string	"GNU C17 12.1.0 -mabi=ilp32 -mtune=rocket -misa-spec=2.2 -march=rv32i -g -Os -ffreestanding"
 .LASF15:
 	.string	"user_irq_0_ev_enable_write"
 .LASF9:
