@@ -41,13 +41,13 @@ module uart #(
   assign rx = io_in[5];	// Connect mprj_io_5 to rx
 
   // irq
-  wire irq;
-  assign user_irq = {2'b00,irq};	// Use USER_IRQ_0
+  wire o_irq;
+  assign user_irq = {2'b00,irq  };	// Use USER_IRQ_0
 
   // CSR
   wire [7:0] rx_data; 
-  wire irq_en;
-  wire rx_finish;
+  wire irq ;
+  wire o_rx_notfull;
   wire rx_busy;
   wire [7:0] tx_data;
   wire tx_start_clear;
@@ -55,6 +55,7 @@ module uart #(
   wire tx_busy;
   wire wb_valid;
   wire frame_err;
+  
   
   // 32'h3000_0000 memory regions of user project  
   assign wb_valid = (wbs_adr_i[31:8] == 32'h3000_00) ? wbs_cyc_i && wbs_stb_i : 1'b0;
@@ -68,9 +69,9 @@ module uart #(
     .clk_div    (clk_div    ),
     .rx         (rx         ),
     .rx_data    (rx_data    ),
-    .rx_finish  (rx_finish  ),	// data receive finish
-    .irq        (irq        ),
+    .irq    (irq ),
     .frame_err  (frame_err  ),
+    .i_rx_notfull  (o_rx_notfull ),
     .busy       (rx_busy    )
   );
 
@@ -96,10 +97,11 @@ module uart #(
 	.o_wb_ack	(wbs_ack_o),
 	.o_wb_dat (wbs_dat_o),
 	.i_rx		  (rx_data	),
-  .i_irq    (irq      ),
+  .irq   (irq ),
   .i_frame_err  (frame_err),
   .i_rx_busy    (rx_busy  ),
-	.o_rx_finish  (rx_finish),
+  // .o_irq        (o_irq),
+  .o_rx_notfull (o_rx_notfull),
 	.o_tx		      (tx_data	),
 	.i_tx_start_clear(tx_start_clear), 
   .i_tx_busy    (tx_busy  ),
