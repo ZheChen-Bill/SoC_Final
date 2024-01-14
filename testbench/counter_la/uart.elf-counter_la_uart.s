@@ -227,180 +227,180 @@ main:
 .LBE18:
 .LBE17:
 .LBE16:
-	.loc 1 167 2 is_stmt 1
-	.loc 1 167 13 is_stmt 0
+	.loc 1 166 2 is_stmt 1
+	.loc 1 166 13 is_stmt 0
 	call	fir
 .LVL5:
-	.loc 1 168 2 is_stmt 1
-	.loc 1 168 43 is_stmt 0
+	.loc 1 167 2 is_stmt 1
+	.loc 1 167 43 is_stmt 0
 	lw	a5,0(a0)
+	slli	a5,a5,16
+	.loc 1 167 36
+	sw	a5,12(s0)
+	.loc 1 168 2 is_stmt 1
+	.loc 1 168 47 is_stmt 0
+	lw	a5,4(a0)
 	slli	a5,a5,16
 	.loc 1 168 36
 	sw	a5,12(s0)
 	.loc 1 169 2 is_stmt 1
 	.loc 1 169 47 is_stmt 0
-	lw	a5,4(a0)
+	lw	a5,8(a0)
 	slli	a5,a5,16
 	.loc 1 169 36
 	sw	a5,12(s0)
 	.loc 1 170 2 is_stmt 1
 	.loc 1 170 47 is_stmt 0
-	lw	a5,8(a0)
+	lw	a5,12(a0)
 	slli	a5,a5,16
 	.loc 1 170 36
 	sw	a5,12(s0)
 	.loc 1 171 2 is_stmt 1
 	.loc 1 171 47 is_stmt 0
-	lw	a5,12(a0)
+	lw	a5,16(a0)
 	slli	a5,a5,16
 	.loc 1 171 36
 	sw	a5,12(s0)
 	.loc 1 172 2 is_stmt 1
 	.loc 1 172 47 is_stmt 0
-	lw	a5,16(a0)
+	lw	a5,20(a0)
 	slli	a5,a5,16
 	.loc 1 172 36
 	sw	a5,12(s0)
 	.loc 1 173 2 is_stmt 1
 	.loc 1 173 47 is_stmt 0
-	lw	a5,20(a0)
+	lw	a5,24(a0)
 	slli	a5,a5,16
 	.loc 1 173 36
 	sw	a5,12(s0)
 	.loc 1 174 2 is_stmt 1
 	.loc 1 174 47 is_stmt 0
-	lw	a5,24(a0)
+	lw	a5,28(a0)
 	slli	a5,a5,16
 	.loc 1 174 36
 	sw	a5,12(s0)
 	.loc 1 175 2 is_stmt 1
 	.loc 1 175 47 is_stmt 0
-	lw	a5,28(a0)
+	lw	a5,32(a0)
 	slli	a5,a5,16
 	.loc 1 175 36
 	sw	a5,12(s0)
 	.loc 1 176 2 is_stmt 1
 	.loc 1 176 47 is_stmt 0
-	lw	a5,32(a0)
+	lw	a5,36(a0)
 	slli	a5,a5,16
 	.loc 1 176 36
 	sw	a5,12(s0)
 	.loc 1 177 2 is_stmt 1
-	.loc 1 177 47 is_stmt 0
-	lw	a5,36(a0)
+	.loc 1 177 48 is_stmt 0
+	lw	a5,40(a0)
 	slli	a5,a5,16
 	.loc 1 177 36
 	sw	a5,12(s0)
-	.loc 1 178 2 is_stmt 1
-	.loc 1 178 48 is_stmt 0
-	lw	a5,40(a0)
-	slli	a5,a5,16
-	.loc 1 178 36
-	sw	a5,12(s0)
-	.loc 1 183 2 is_stmt 1
-	.loc 1 183 8 is_stmt 0
+	.loc 1 181 2 is_stmt 1
+	.loc 1 181 8 is_stmt 0
 	call	matmul
 .LVL6:
-	.loc 1 184 2 is_stmt 1
-	.loc 1 184 43 is_stmt 0
+	.loc 1 182 2 is_stmt 1
+	.loc 1 182 43 is_stmt 0
 	lw	a5,0(a0)
+	slli	a5,a5,16
+	.loc 1 182 36
+	sw	a5,12(s0)
+	.loc 1 183 2 is_stmt 1
+	.loc 1 183 47 is_stmt 0
+	lw	a5,4(a0)
+	slli	a5,a5,16
+	.loc 1 183 36
+	sw	a5,12(s0)
+	.loc 1 184 2 is_stmt 1
+	.loc 1 184 47 is_stmt 0
+	lw	a5,8(a0)
 	slli	a5,a5,16
 	.loc 1 184 36
 	sw	a5,12(s0)
 	.loc 1 185 2 is_stmt 1
 	.loc 1 185 47 is_stmt 0
-	lw	a5,4(a0)
+	lw	a5,12(a0)
 	slli	a5,a5,16
 	.loc 1 185 36
 	sw	a5,12(s0)
-	.loc 1 186 2 is_stmt 1
-	.loc 1 186 47 is_stmt 0
-	lw	a5,8(a0)
-	slli	a5,a5,16
-	.loc 1 186 36
-	sw	a5,12(s0)
-	.loc 1 187 2 is_stmt 1
-	.loc 1 187 47 is_stmt 0
-	lw	a5,12(a0)
-	slli	a5,a5,16
-	.loc 1 187 36
-	sw	a5,12(s0)
-	.loc 1 191 2 is_stmt 1
-	.loc 1 191 8 is_stmt 0
+	.loc 1 189 2 is_stmt 1
+	.loc 1 189 8 is_stmt 0
 	call	qsort
 .LVL7:
-	.loc 1 192 2 is_stmt 1
-	.loc 1 192 43 is_stmt 0
+	.loc 1 190 2 is_stmt 1
+	.loc 1 190 43 is_stmt 0
 	lw	a5,0(a0)
+	slli	a5,a5,16
+	.loc 1 190 36
+	sw	a5,12(s0)
+	.loc 1 191 2 is_stmt 1
+	.loc 1 191 47 is_stmt 0
+	lw	a5,4(a0)
+	slli	a5,a5,16
+	.loc 1 191 36
+	sw	a5,12(s0)
+	.loc 1 192 2 is_stmt 1
+	.loc 1 192 47 is_stmt 0
+	lw	a5,8(a0)
 	slli	a5,a5,16
 	.loc 1 192 36
 	sw	a5,12(s0)
 	.loc 1 193 2 is_stmt 1
 	.loc 1 193 47 is_stmt 0
-	lw	a5,4(a0)
+	lw	a5,12(a0)
 	slli	a5,a5,16
 	.loc 1 193 36
 	sw	a5,12(s0)
 	.loc 1 194 2 is_stmt 1
 	.loc 1 194 47 is_stmt 0
-	lw	a5,8(a0)
+	lw	a5,16(a0)
 	slli	a5,a5,16
 	.loc 1 194 36
 	sw	a5,12(s0)
 	.loc 1 195 2 is_stmt 1
 	.loc 1 195 47 is_stmt 0
-	lw	a5,12(a0)
+	lw	a5,20(a0)
 	slli	a5,a5,16
 	.loc 1 195 36
 	sw	a5,12(s0)
 	.loc 1 196 2 is_stmt 1
 	.loc 1 196 47 is_stmt 0
-	lw	a5,16(a0)
+	lw	a5,24(a0)
 	slli	a5,a5,16
 	.loc 1 196 36
 	sw	a5,12(s0)
 	.loc 1 197 2 is_stmt 1
 	.loc 1 197 47 is_stmt 0
-	lw	a5,20(a0)
+	lw	a5,28(a0)
 	slli	a5,a5,16
 	.loc 1 197 36
 	sw	a5,12(s0)
 	.loc 1 198 2 is_stmt 1
 	.loc 1 198 47 is_stmt 0
-	lw	a5,24(a0)
+	lw	a5,32(a0)
 	slli	a5,a5,16
 	.loc 1 198 36
 	sw	a5,12(s0)
 	.loc 1 199 2 is_stmt 1
 	.loc 1 199 47 is_stmt 0
-	lw	a5,28(a0)
+	lw	a5,36(a0)
 	slli	a5,a5,16
 	.loc 1 199 36
 	sw	a5,12(s0)
-	.loc 1 200 2 is_stmt 1
-	.loc 1 200 47 is_stmt 0
-	lw	a5,32(a0)
-	slli	a5,a5,16
-	.loc 1 200 36
-	sw	a5,12(s0)
 	.loc 1 201 2 is_stmt 1
-	.loc 1 201 47 is_stmt 0
-	lw	a5,36(a0)
-	slli	a5,a5,16
-	.loc 1 201 36
-	sw	a5,12(s0)
-	.loc 1 203 2 is_stmt 1
 	call	check
 .LVL8:
-	.loc 1 205 2
-	.loc 1 205 36 is_stmt 0
+	.loc 1 203 2
+	.loc 1 203 36 is_stmt 0
 	li	a5,-1420754944
-	.loc 1 206 1
+	.loc 1 204 1
 	lw	ra,12(sp)
 	.cfi_restore 1
-	.loc 1 205 36
+	.loc 1 203 36
 	sw	a5,12(s0)
-	.loc 1 206 1
+	.loc 1 204 1
 	lw	s0,8(sp)
 	.cfi_restore 8
 	addi	sp,sp,16
@@ -527,7 +527,7 @@ main:
 	.byte	0x10
 	.string	"tmp"
 	.byte	0x1
-	.byte	0xa7
+	.byte	0xa6
 	.byte	0x7
 	.4byte	0x96
 	.4byte	.LLST1

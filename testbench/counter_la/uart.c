@@ -60,34 +60,68 @@ int __attribute__ ( ( section ( ".mprj" ) ) ) uart_read()
 
 //fir=====================================================
 void __attribute__ ( ( section ( ".mprjram" ) ) ) initfir() {
-	for(int i=0; i<N; i++) {
-		inputbuffer[i] = 0;
-		outputsignal[i] = 0;
+	//initial your fir
+	write(data_length_address,data_length);
+	for(int register i=0;i<N;i=i+1){
+		write((tap_base+4*i),taps[i]);
+	}
+	// reg_fir_x = 0;
+	// reg_fir_y = 0;
+	// outputbuffer[0] = 0;
+}
+
+void __attribute__ ( ( section ( ".mprjram" ) ) ) preparedata() {
+	//initial your fir
+	for(int register i=0;i<M;i=i+1){
+		inputsignal[i] = i;
+	}
+
+}
+void __attribute__ ( ( section ( ".mprjram" ) ) ) start() {
+	//check ap_idle = 1(bit[2] = 1), ap_start = 1;
+	while(1){
+		if (((read(ap_control_address) & (1<<2)) == 0x00000004)){
+			write((ap_control_address),((read(ap_control_address) | 1)));
+			break;
+		}
 	}
 }
 
-int __attribute__ ( ( section ( ".mprjram" ) ) ) firfilter(int inputsample){
-	for(int i=N-1; i>0; i--){
-		inputbuffer[i] = inputbuffer[i-1];
-	}
-	inputbuffer[0] = inputsample;
-	
-	int outputsample = 0;
-	for(int i=0; i<N; i++){
-		outputsample += taps[i]*inputbuffer[i];
-	}
-	return outputsample;
+int __attribute__ ( ( section ( ".mprjram" ) ) ) input(int indata) {
+	//check fir ready to receive data (bit[4] = 1), then write data;
+//	while(1){
+//		if (read(ap_control_address) & (1<<4) == 0x00000010){
+			write(input_address,indata);
+//			break;
+//		}
+//	}
+}
+
+int __attribute__ ( ( section ( ".mprjram" ) ) ) output() {
+	//check fir is valid for output data (bit[5] = 1), then read data;
+//	while(1){
+//		if (read(ap_control_address) & (1<<5) == 0x00000020){
+			reg_fir_y = read(output_address);
+			return reg_fir_y;
+//			break;
+//		}
+//	}
 }
 
 int* __attribute__ ( ( section ( ".mprjram" ) ) ) fir(){
 	initfir();
-	for(int i=0; i<M; i++){
-		outputsignal[i] = firfilter(inputsignal[i]);
-	}
-	return outputsignal;
-}
+	preparedata();
+	start();
+	for(int register i=0;i<M;i=i+1){
 
-//matmul
+		input(inputsignal[i]);
+
+		outputsignal[i] = output();
+	}
+		return outputsignal;
+	}
+
+//matmul=====================================================
 int* __attribute__ ( ( section ( ".mprjram" ) ) ) matmul()
 {
 	int i=0;
@@ -107,7 +141,7 @@ int* __attribute__ ( ( section ( ".mprjram" ) ) ) matmul()
 	return result;
 }
 
-//qsort
+//qsort=====================================================
 int __attribute__ ( ( section ( ".mprjram" ) ) ) partition(int low,int hi){
 	int pivot = C[hi];
 	int i = low-1,j;
