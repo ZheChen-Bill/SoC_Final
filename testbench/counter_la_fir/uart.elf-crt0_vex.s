@@ -131,7 +131,7 @@ bss_done:
   csrw mie,a0
 
 
-
+  csrrs a0, mstatus, 0x8
 
 
   call main
