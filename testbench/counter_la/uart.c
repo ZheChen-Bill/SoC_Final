@@ -110,7 +110,7 @@ int __attribute__ ( ( section ( ".mprjram" ) ) ) output() {
 
 int* __attribute__ ( ( section ( ".mprjram" ) ) ) fir(){
 	initfir();
-	preparedata();
+	//preparedata();
 	start();
 	for(int register i=0;i<M;i=i+1){
 
