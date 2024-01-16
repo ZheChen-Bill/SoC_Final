@@ -178,7 +178,6 @@ module uart_tb;
 
 	//test FIR
 	initial begin
-
 		wait(checkbits == 16'h0000);
 		$display("Call function fir() in User Project BRAM (mprjram, 0x38000000) return value passed, 0x%x", checkbits);
 		wait(checkbits == 16'hFFF6);
@@ -241,7 +240,7 @@ module uart_tb;
 	end
 
 	initial begin
-
+		/*
 		wait(checkbits == 16'hAB40);
 		$display("LA Test 1 started");
 		
@@ -257,7 +256,8 @@ module uart_tb;
 		$display("***********");
 		send_data_2;
 		#10000;
-		wait(checkbits == 16'h003D);
+		*/
+		wait(checkbits == 16'd9073);
 		$display("***********");
 		$display("*[UART]uart3(end character) start*");
 		$display("***********");

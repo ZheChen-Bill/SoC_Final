@@ -89,6 +89,32 @@ data_loop:
   j data_loop
 data_done:
 
+inputdata_init:
+  la a0, _finputdata
+  la a1, _inputdata
+  la a2, _inputdata_rom
+inputdata_loop:
+  beq a0,a1,inputdata_done
+  lw a3,0(a2)
+  sw a3,0(a0)
+  add a0,a0,4
+  add a2,a2,4
+  j inputdata_loop
+inputdata_done:
+
+outputdata_init:
+  la a0, _foutputdata
+  la a1, _outputdata
+  la a2, _outputdata_rom
+outputdata_loop:
+  beq a0,a1,outputdata_done
+  lw a3,0(a2)
+  sw a3,0(a0)
+  add a0,a0,4
+  add a2,a2,4
+  j outputdata_loop
+outputdata_done:
+
 bss_init:
   la a0, _fbss
   la a1, _ebss
