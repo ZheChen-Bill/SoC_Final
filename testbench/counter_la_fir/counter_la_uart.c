@@ -33,7 +33,8 @@ extern int uart_read();
 extern void check();
 
 extern void fir();
-extern int check_output(int index);
+extern void endflag_check();
+extern int  check_output(int index);
 extern int* matmul();
 extern int* qsort();
 
@@ -187,6 +188,8 @@ void main()
 	reg_mprj_datal = *(tmp+7) << 16;
 	reg_mprj_datal = *(tmp+8) << 16;
 	reg_mprj_datal = *(tmp+9) << 16;	
+
+	endflag_check();
 
 	for(int i=0; i<64;i=i+1){
 		reg_mprj_datal = (check_output(i)) << 16; 

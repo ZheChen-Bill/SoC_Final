@@ -76,11 +76,23 @@ void __attribute__ ( ( section ( ".mprjram" ) ) ) ap_start() {
 	}
 }
 
-void __attribute__ ( ( section ( ".mprjram" ) ) ) start_DMA() {
-	write(DMA_address, input_base);
-	write(DMA_length, data_length);
+void __attribute__ ( ( section ( ".mprjram" ) ) ) start_DMA2() {
+	write(DMA2_address, output_base);
+	write(DMA2_length, data_length);
 }
 
+void __attribute__ ( ( section ( ".mprjram" ) ) ) start_DMA1() {
+	write(DMA1_address, input_base);
+	write(DMA1_length, data_length);
+}
+
+void __attribute__ ( ( section ( ".mprjram" ) ) ) endflag_check() {
+	while(1){
+		if(read(endflag_address) == 0x00000001){
+			break;
+		}
+	}
+}
 int __attribute__ ( ( section ( ".mprjram" ) ) ) check_output(int index) {
 	reg_fir_y = read(output_base + 4*index);
 	return reg_fir_y;
@@ -91,7 +103,9 @@ void __attribute__ ( ( section ( ".mprjram" ) ) ) fir(){
 
 	ap_start();
 
-	start_DMA();
+	start_DMA2();
+	
+	start_DMA1();
 }
 
 

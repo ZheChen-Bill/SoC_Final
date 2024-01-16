@@ -24,8 +24,11 @@ volatile OUTPUTDATA int outputsignal[M];
 #define ap_control_address  0x30000000
 #define data_length_address 0x30000010
 #define tap_base            0x30000020
-#define DMA_address         0x30000080
-#define DMA_length          0x30000084
+#define DMA1_address        0x30000080
+#define DMA1_length         0x30000084
+#define DMA2_address        0x30000088
+#define DMA2_length         0x3000008C
+#define endflag_address     0x30000090
 #define input_base          0x38002000
 #define output_base         0x38003000
 /*
