@@ -14,11 +14,11 @@
 main:
 .LFB321:
 	.file 1 "counter_la_uart.c"
-	.loc 1 52 1
+	.loc 1 53 1
 	.cfi_startproc
-	.loc 1 54 5
-	.loc 1 82 5
-	.loc 1 52 1 is_stmt 0
+	.loc 1 55 5
+	.loc 1 83 5
+	.loc 1 53 1 is_stmt 0
 	addi	sp,sp,-16
 	.cfi_def_cfa_offset 16
 	sw	s0,8(sp)
@@ -29,162 +29,162 @@ main:
 	.cfi_offset 1, -4
 	.cfi_offset 9, -12
 	.cfi_offset 18, -16
-	.loc 1 82 53
+	.loc 1 83 53
 	li	a2,1
 	li	a5,-268419072
-	.loc 1 84 39
+	.loc 1 85 39
 	li	a3,8192
 	addi	a4,a3,-2039
-	.loc 1 82 53
+	.loc 1 83 53
 	sw	a2,-2048(a5)
-	.loc 1 84 5 is_stmt 1
-	.loc 1 84 39 is_stmt 0
-	li	a5,637534208
-	sw	a4,160(a5)
 	.loc 1 85 5 is_stmt 1
 	.loc 1 85 39 is_stmt 0
-	sw	a4,156(a5)
+	li	a5,637534208
+	sw	a4,160(a5)
 	.loc 1 86 5 is_stmt 1
 	.loc 1 86 39 is_stmt 0
-	sw	a4,152(a5)
+	sw	a4,156(a5)
 	.loc 1 87 5 is_stmt 1
 	.loc 1 87 39 is_stmt 0
-	sw	a4,148(a5)
+	sw	a4,152(a5)
 	.loc 1 88 5 is_stmt 1
 	.loc 1 88 39 is_stmt 0
-	sw	a4,144(a5)
+	sw	a4,148(a5)
 	.loc 1 89 5 is_stmt 1
 	.loc 1 89 39 is_stmt 0
-	sw	a4,140(a5)
+	sw	a4,144(a5)
 	.loc 1 90 5 is_stmt 1
 	.loc 1 90 39 is_stmt 0
-	sw	a4,136(a5)
+	sw	a4,140(a5)
 	.loc 1 91 5 is_stmt 1
 	.loc 1 91 39 is_stmt 0
-	sw	a4,132(a5)
+	sw	a4,136(a5)
 	.loc 1 92 5 is_stmt 1
 	.loc 1 92 39 is_stmt 0
-	sw	a4,128(a5)
+	sw	a4,132(a5)
 	.loc 1 93 5 is_stmt 1
 	.loc 1 93 39 is_stmt 0
-	sw	a4,124(a5)
+	sw	a4,128(a5)
 	.loc 1 94 5 is_stmt 1
 	.loc 1 94 39 is_stmt 0
-	sw	a4,120(a5)
+	sw	a4,124(a5)
 	.loc 1 95 5 is_stmt 1
 	.loc 1 95 39 is_stmt 0
-	sw	a4,116(a5)
+	sw	a4,120(a5)
 	.loc 1 96 5 is_stmt 1
 	.loc 1 96 39 is_stmt 0
-	sw	a4,112(a5)
+	sw	a4,116(a5)
 	.loc 1 97 5 is_stmt 1
 	.loc 1 97 39 is_stmt 0
-	sw	a4,108(a5)
+	sw	a4,112(a5)
 	.loc 1 98 5 is_stmt 1
 	.loc 1 98 39 is_stmt 0
-	sw	a4,104(a5)
+	sw	a4,108(a5)
 	.loc 1 99 5 is_stmt 1
 	.loc 1 99 39 is_stmt 0
+	sw	a4,104(a5)
+	.loc 1 100 5 is_stmt 1
+	.loc 1 100 39 is_stmt 0
 	sw	a4,100(a5)
-	.loc 1 101 5 is_stmt 1
-	.loc 1 101 39 is_stmt 0
-	sw	a4,96(a5)
 	.loc 1 102 5 is_stmt 1
 	.loc 1 102 39 is_stmt 0
-	sw	a4,92(a5)
+	sw	a4,96(a5)
 	.loc 1 103 5 is_stmt 1
 	.loc 1 103 39 is_stmt 0
-	sw	a4,88(a5)
+	sw	a4,92(a5)
 	.loc 1 104 5 is_stmt 1
 	.loc 1 104 39 is_stmt 0
-	sw	a4,84(a5)
+	sw	a4,88(a5)
 	.loc 1 105 5 is_stmt 1
 	.loc 1 105 39 is_stmt 0
-	sw	a4,80(a5)
+	sw	a4,84(a5)
 	.loc 1 106 5 is_stmt 1
 	.loc 1 106 39 is_stmt 0
-	sw	a4,76(a5)
+	sw	a4,80(a5)
 	.loc 1 107 5 is_stmt 1
 	.loc 1 107 39 is_stmt 0
-	sw	a4,72(a5)
+	sw	a4,76(a5)
 	.loc 1 108 5 is_stmt 1
 	.loc 1 108 39 is_stmt 0
-	sw	a4,68(a5)
+	sw	a4,72(a5)
 	.loc 1 109 5 is_stmt 1
 	.loc 1 109 39 is_stmt 0
-	sw	a4,64(a5)
+	sw	a4,68(a5)
 	.loc 1 110 5 is_stmt 1
 	.loc 1 110 39 is_stmt 0
-	sw	a4,52(a5)
+	sw	a4,64(a5)
 	.loc 1 111 5 is_stmt 1
 	.loc 1 111 39 is_stmt 0
-	sw	a4,48(a5)
+	sw	a4,52(a5)
 	.loc 1 112 5 is_stmt 1
 	.loc 1 112 39 is_stmt 0
-	sw	a4,44(a5)
+	sw	a4,48(a5)
 	.loc 1 113 5 is_stmt 1
 	.loc 1 113 39 is_stmt 0
-	sw	a4,40(a5)
+	sw	a4,44(a5)
 	.loc 1 114 5 is_stmt 1
 	.loc 1 114 39 is_stmt 0
+	sw	a4,40(a5)
+	.loc 1 115 5 is_stmt 1
+	.loc 1 115 39 is_stmt 0
 	sw	a4,36(a5)
-	.loc 1 116 5 is_stmt 1
-	.loc 1 116 39 is_stmt 0
-	addi	a3,a3,-2040
-	sw	a3,60(a5)
 	.loc 1 117 5 is_stmt 1
 	.loc 1 117 39 is_stmt 0
+	addi	a3,a3,-2040
+	sw	a3,60(a5)
+	.loc 1 118 5 is_stmt 1
+	.loc 1 118 39 is_stmt 0
 	li	a4,1026
 	sw	a4,56(a5)
-	.loc 1 121 2 is_stmt 1
-	.loc 1 121 36 is_stmt 0
-	sw	a2,0(a5)
 	.loc 1 122 2 is_stmt 1
-	.loc 1 122 10 is_stmt 0
+	.loc 1 122 36 is_stmt 0
+	sw	a2,0(a5)
+	.loc 1 123 2 is_stmt 1
+	.loc 1 123 10 is_stmt 0
 	li	s0,637534208
-	.loc 1 122 43
+	.loc 1 123 43
 	li	a4,1
 .L2:
-	.loc 1 122 43 is_stmt 1 discriminator 1
-	.loc 1 122 10 is_stmt 0 discriminator 1
+	.loc 1 123 43 is_stmt 1 discriminator 1
+	.loc 1 123 10 is_stmt 0 discriminator 1
 	lw	a5,0(s0)
-	.loc 1 122 43 discriminator 1
+	.loc 1 123 43 discriminator 1
 	beq	a5,a4,.L2
-	.loc 1 126 2 is_stmt 1
-	.loc 1 126 114 is_stmt 0
+	.loc 1 127 2 is_stmt 1
+	.loc 1 127 114 is_stmt 0
 	li	a5,-268423168
 	sw	zero,12(a5)
-	.loc 1 126 57
+	.loc 1 127 57
 	sw	zero,28(a5)
-	.loc 1 127 2 is_stmt 1
-	.loc 1 127 112 is_stmt 0
-	li	a3,-1
-	sw	a3,8(a5)
-	.loc 1 127 56
-	sw	a3,24(a5)
 	.loc 1 128 2 is_stmt 1
 	.loc 1 128 112 is_stmt 0
-	sw	zero,4(a5)
+	li	a3,-1
+	sw	a3,8(a5)
 	.loc 1 128 56
-	sw	zero,20(a5)
+	sw	a3,24(a5)
 	.loc 1 129 2 is_stmt 1
-	.loc 1 129 100 is_stmt 0
+	.loc 1 129 112 is_stmt 0
+	sw	zero,4(a5)
+	.loc 1 129 56
+	sw	zero,20(a5)
+	.loc 1 130 2 is_stmt 1
+	.loc 1 130 100 is_stmt 0
 	sw	zero,0(a5)
-	.loc 1 129 50
+	.loc 1 130 50
 	sw	zero,16(a5)
-	.loc 1 132 2 is_stmt 1
-	.loc 1 132 36 is_stmt 0
+	.loc 1 133 2 is_stmt 1
+	.loc 1 133 36 is_stmt 0
 	li	a3,-1421869056
 	sw	a3,12(s0)
-	.loc 1 135 2 is_stmt 1
-	.loc 1 135 56 is_stmt 0
+	.loc 1 136 2 is_stmt 1
+	.loc 1 136 56 is_stmt 0
 	sw	zero,56(a5)
-	.loc 1 138 2 is_stmt 1
-	.loc 1 138 112 is_stmt 0
+	.loc 1 139 2 is_stmt 1
+	.loc 1 139 112 is_stmt 0
 	sw	zero,8(a5)
-	.loc 1 138 56
+	.loc 1 139 56
 	sw	zero,24(a5)
-	.loc 1 150 2 is_stmt 1
+	.loc 1 151 2 is_stmt 1
 .LBB13:
 .LBB14:
 	.file 2 "../../firmware/irq_vex.h"
@@ -199,8 +199,8 @@ main:
  #NO_APP
 .LBE14:
 .LBE13:
-	.loc 1 151 2
 	.loc 1 152 2
+	.loc 1 153 2
 .LBB15:
 .LBB16:
 	.loc 2 31 2
@@ -214,7 +214,7 @@ main:
  #NO_APP
 .LBE16:
 .LBE15:
-	.loc 1 154 2
+	.loc 1 155 2
 .LBB17:
 	.file 3 "../../firmware/csr.h"
 	.loc 3 806 2
@@ -230,143 +230,146 @@ main:
 .LBE19:
 .LBE18:
 .LBE17:
-	.loc 1 167 2 is_stmt 1
-	call	fir
-.LVL5:
-	.loc 1 171 2
-	.loc 1 171 13 is_stmt 0
-	call	matmul
-.LVL6:
-	.loc 1 172 2 is_stmt 1
-	.loc 1 172 43 is_stmt 0
-	lw	a5,0(a0)
-.LBB20:
-	.loc 1 192 37
-	li	s1,637534208
-	.loc 1 191 16
-	li	s2,64
-.LBE20:
-	.loc 1 172 43
-	slli	a5,a5,16
-	.loc 1 172 36
-	sw	a5,12(s0)
 	.loc 1 173 2 is_stmt 1
-	.loc 1 173 47 is_stmt 0
-	lw	a5,4(a0)
-	slli	a5,a5,16
-	.loc 1 173 36
+	.loc 1 173 36 is_stmt 0
+	li	a5,4063232
 	sw	a5,12(s0)
 	.loc 1 174 2 is_stmt 1
-	.loc 1 174 47 is_stmt 0
-	lw	a5,8(a0)
-	slli	a5,a5,16
-	.loc 1 174 36
-	sw	a5,12(s0)
+	.loc 1 174 13 is_stmt 0
+	call	matmul
+.LVL5:
 	.loc 1 175 2 is_stmt 1
-	.loc 1 175 47 is_stmt 0
-	lw	a5,12(a0)
+	.loc 1 175 43 is_stmt 0
+	lw	a5,0(a0)
+.LBB20:
+	.loc 1 198 37
+	li	s1,637534208
+	.loc 1 197 16
+	li	s2,64
+.LBE20:
+	.loc 1 175 43
 	slli	a5,a5,16
 	.loc 1 175 36
 	sw	a5,12(s0)
-	.loc 1 179 2 is_stmt 1
-	.loc 1 179 8 is_stmt 0
-	call	qsort
-.LVL7:
-	.loc 1 180 2 is_stmt 1
-	.loc 1 180 43 is_stmt 0
-	lw	a5,0(a0)
-	slli	a5,a5,16
-	.loc 1 180 36
-	sw	a5,12(s0)
-	.loc 1 181 2 is_stmt 1
-	.loc 1 181 47 is_stmt 0
+	.loc 1 176 2 is_stmt 1
+	.loc 1 176 47 is_stmt 0
 	lw	a5,4(a0)
 	slli	a5,a5,16
-	.loc 1 181 36
+	.loc 1 176 36
 	sw	a5,12(s0)
-	.loc 1 182 2 is_stmt 1
-	.loc 1 182 47 is_stmt 0
+	.loc 1 177 2 is_stmt 1
+	.loc 1 177 47 is_stmt 0
 	lw	a5,8(a0)
 	slli	a5,a5,16
-	.loc 1 182 36
+	.loc 1 177 36
 	sw	a5,12(s0)
-	.loc 1 183 2 is_stmt 1
-	.loc 1 183 47 is_stmt 0
+	.loc 1 178 2 is_stmt 1
+	.loc 1 178 47 is_stmt 0
 	lw	a5,12(a0)
+	slli	a5,a5,16
+	.loc 1 178 36
+	sw	a5,12(s0)
+	.loc 1 182 2 is_stmt 1
+	.loc 1 182 8 is_stmt 0
+	call	qsort
+.LVL6:
+	.loc 1 183 2 is_stmt 1
+	.loc 1 183 43 is_stmt 0
+	lw	a5,0(a0)
 	slli	a5,a5,16
 	.loc 1 183 36
 	sw	a5,12(s0)
 	.loc 1 184 2 is_stmt 1
 	.loc 1 184 47 is_stmt 0
-	lw	a5,16(a0)
+	lw	a5,4(a0)
 	slli	a5,a5,16
 	.loc 1 184 36
 	sw	a5,12(s0)
 	.loc 1 185 2 is_stmt 1
 	.loc 1 185 47 is_stmt 0
-	lw	a5,20(a0)
+	lw	a5,8(a0)
 	slli	a5,a5,16
 	.loc 1 185 36
 	sw	a5,12(s0)
 	.loc 1 186 2 is_stmt 1
 	.loc 1 186 47 is_stmt 0
-	lw	a5,24(a0)
+	lw	a5,12(a0)
 	slli	a5,a5,16
 	.loc 1 186 36
 	sw	a5,12(s0)
 	.loc 1 187 2 is_stmt 1
 	.loc 1 187 47 is_stmt 0
-	lw	a5,28(a0)
+	lw	a5,16(a0)
 	slli	a5,a5,16
 	.loc 1 187 36
 	sw	a5,12(s0)
 	.loc 1 188 2 is_stmt 1
 	.loc 1 188 47 is_stmt 0
-	lw	a5,32(a0)
+	lw	a5,20(a0)
 	slli	a5,a5,16
 	.loc 1 188 36
 	sw	a5,12(s0)
 	.loc 1 189 2 is_stmt 1
 	.loc 1 189 47 is_stmt 0
-	lw	a5,36(a0)
+	lw	a5,24(a0)
 	slli	a5,a5,16
 	.loc 1 189 36
 	sw	a5,12(s0)
+	.loc 1 190 2 is_stmt 1
+	.loc 1 190 47 is_stmt 0
+	lw	a5,28(a0)
+	slli	a5,a5,16
+	.loc 1 190 36
+	sw	a5,12(s0)
 	.loc 1 191 2 is_stmt 1
+	.loc 1 191 47 is_stmt 0
+	lw	a5,32(a0)
+	slli	a5,a5,16
+	.loc 1 191 36
+	sw	a5,12(s0)
+	.loc 1 192 2 is_stmt 1
+	.loc 1 192 47 is_stmt 0
+	lw	a5,36(a0)
+	slli	a5,a5,16
+	.loc 1 192 36
+	sw	a5,12(s0)
+	.loc 1 195 2 is_stmt 1
+	call	endflag_check
+.LVL7:
+	.loc 1 197 2
 .LBB21:
-	.loc 1 191 6
-.LVL8:
-	.loc 1 191 16
-	.loc 1 191 10 is_stmt 0
+	.loc 1 197 6
+	.loc 1 197 16
+	.loc 1 197 10 is_stmt 0
 	li	s0,0
-.LVL9:
+.LVL8:
 .L3:
-	.loc 1 192 3 is_stmt 1 discriminator 3
-	.loc 1 192 40 is_stmt 0 discriminator 3
+	.loc 1 198 3 is_stmt 1 discriminator 3
+	.loc 1 198 40 is_stmt 0 discriminator 3
 	mv	a0,s0
 	call	check_output
-.LVL10:
-	.loc 1 192 57 discriminator 3
+.LVL9:
+	.loc 1 198 57 discriminator 3
 	slli	a0,a0,16
-	.loc 1 192 37 discriminator 3
+	.loc 1 198 37 discriminator 3
 	sw	a0,12(s1)
-	.loc 1 191 21 is_stmt 1 discriminator 3
+	.loc 1 197 21 is_stmt 1 discriminator 3
 	addi	s0,s0,1
-.LVL11:
-	.loc 1 191 16 discriminator 3
+.LVL10:
+	.loc 1 197 16 discriminator 3
 	bne	s0,s2,.L3
 .LBE21:
-	.loc 1 197 2
-	.loc 1 198 1 is_stmt 0
+	.loc 1 203 2
+	.loc 1 204 1 is_stmt 0
 	lw	ra,12(sp)
 	.cfi_restore 1
 	lw	s0,8(sp)
 	.cfi_restore 8
-.LVL12:
-	.loc 1 197 36
+.LVL11:
+	.loc 1 203 36
 	li	a5,-1420754944
 	sw	a5,12(s1)
-	.loc 1 198 1
+	.loc 1 204 1
 	lw	s2,0(sp)
 	.cfi_restore 18
 	lw	s1,4(sp)
@@ -444,42 +447,42 @@ main:
 	.byte	0xc
 	.4byte	.LASF18
 	.byte	0x1
-	.byte	0x24
+	.byte	0x25
 	.byte	0xc
 	.4byte	0x6a
 	.4byte	0x8e
 	.byte	0xd
 	.4byte	0x6a
 	.byte	0
-	.byte	0x6
-	.4byte	.LASF11
-	.byte	0x26
-	.4byte	0x9e
-	.4byte	0x9e
+	.byte	0xe
+	.4byte	.LASF19
+	.byte	0x1
+	.byte	0x24
+	.byte	0xd
+	.4byte	0x9c
 	.byte	0x3
 	.byte	0
-	.byte	0xe
+	.byte	0x6
+	.4byte	.LASF11
+	.byte	0x27
+	.4byte	0xac
+	.4byte	0xac
+	.byte	0x3
+	.byte	0
+	.byte	0xf
 	.byte	0x4
 	.4byte	0x6a
 	.byte	0x6
 	.4byte	.LASF12
-	.byte	0x25
-	.4byte	0x9e
-	.4byte	0xb4
-	.byte	0x3
-	.byte	0
-	.byte	0xf
-	.string	"fir"
-	.byte	0x1
-	.byte	0x23
-	.byte	0xd
+	.byte	0x26
+	.4byte	0xac
 	.4byte	0xc2
 	.byte	0x3
 	.byte	0
 	.byte	0x10
-	.4byte	.LASF19
+	.4byte	.LASF20
 	.byte	0x1
-	.byte	0x33
+	.byte	0x34
 	.byte	0x6
 	.4byte	.LFB321
 	.4byte	.LFE321-.LFB321
@@ -489,27 +492,27 @@ main:
 	.byte	0x11
 	.4byte	.LASF13
 	.byte	0x1
-	.byte	0x36
+	.byte	0x37
 	.byte	0x9
 	.4byte	0x6a
 	.4byte	.LLST0
 	.byte	0x7
 	.string	"tmp"
-	.byte	0xab
+	.byte	0xae
 	.byte	0x7
-	.4byte	0x9e
+	.4byte	0xac
 	.4byte	.LLST1
 	.byte	0x12
 	.4byte	.LLRL6
 	.4byte	0x11e
 	.byte	0x7
 	.string	"i"
-	.byte	0xbf
+	.byte	0xc5
 	.byte	0xa
 	.4byte	0x6a
 	.4byte	.LLST7
 	.byte	0x13
-	.4byte	.LVL10
+	.4byte	.LVL9
 	.4byte	0x78
 	.byte	0x14
 	.byte	0x1
@@ -523,7 +526,7 @@ main:
 	.4byte	0x1cb
 	.4byte	.LBB13
 	.4byte	.LBE13-.LBB13
-	.byte	0x96
+	.byte	0x97
 	.byte	0x9
 	.4byte	0x137
 	.byte	0x15
@@ -533,7 +536,7 @@ main:
 	.4byte	0x1b1
 	.4byte	.LBB15
 	.4byte	.LBE15-.LBB15
-	.byte	0x98
+	.byte	0x99
 	.byte	0x2
 	.4byte	0x154
 	.byte	0x2
@@ -544,7 +547,7 @@ main:
 	.4byte	0x1e9
 	.4byte	.LBB17
 	.4byte	.LBE17-.LBB17
-	.byte	0x9a
+	.byte	0x9b
 	.byte	0x2
 	.4byte	0x195
 	.byte	0x2
@@ -567,10 +570,10 @@ main:
 	.byte	0
 	.byte	0x5
 	.4byte	.LVL5
-	.4byte	0xb4
+	.4byte	0xb2
 	.byte	0x5
 	.4byte	.LVL6
-	.4byte	0xa4
+	.4byte	0x9c
 	.byte	0x5
 	.4byte	.LVL7
 	.4byte	0x8e
@@ -590,7 +593,7 @@ main:
 	.4byte	0x71
 	.byte	0
 	.byte	0x19
-	.4byte	.LASF20
+	.4byte	.LASF21
 	.byte	0x2
 	.byte	0x16
 	.byte	0x1c
@@ -619,7 +622,7 @@ main:
 	.4byte	0x50
 	.byte	0
 	.byte	0x1d
-	.4byte	.LASF21
+	.4byte	.LASF22
 	.byte	0x4
 	.byte	0x20
 	.byte	0x14
@@ -824,21 +827,12 @@ main:
 	.byte	0
 	.byte	0
 	.byte	0xe
-	.byte	0xf
-	.byte	0
-	.byte	0xb
-	.byte	0xb
-	.byte	0x49
-	.byte	0x13
-	.byte	0
-	.byte	0
-	.byte	0xf
 	.byte	0x2e
 	.byte	0x1
 	.byte	0x3f
 	.byte	0x19
 	.byte	0x3
-	.byte	0x8
+	.byte	0xe
 	.byte	0x3a
 	.byte	0xb
 	.byte	0x3b
@@ -848,6 +842,15 @@ main:
 	.byte	0x3c
 	.byte	0x19
 	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0xf
+	.byte	0xf
+	.byte	0
+	.byte	0xb
+	.byte	0xb
+	.byte	0x49
 	.byte	0x13
 	.byte	0
 	.byte	0
@@ -1092,26 +1095,26 @@ main:
 	.byte	0
 .LLST1:
 	.byte	0x7
-	.4byte	.LVL6
-	.4byte	.LVL7-1
+	.4byte	.LVL5
+	.4byte	.LVL6-1
 	.byte	0x1
 	.byte	0x5a
 	.byte	0x7
-	.4byte	.LVL7
-	.4byte	.LVL9
+	.4byte	.LVL6
+	.4byte	.LVL7-1
 	.byte	0x1
 	.byte	0x5a
 	.byte	0
 .LLST7:
 	.byte	0x7
+	.4byte	.LVL7
 	.4byte	.LVL8
-	.4byte	.LVL9
 	.byte	0x2
 	.byte	0x30
 	.byte	0x9f
 	.byte	0x7
-	.4byte	.LVL9
-	.4byte	.LVL12
+	.4byte	.LVL8
+	.4byte	.LVL11
 	.byte	0x1
 	.byte	0x58
 	.byte	0
@@ -1186,7 +1189,7 @@ main:
 	.section	.debug_line,"",@progbits
 .Ldebug_line0:
 	.section	.debug_str,"MS",@progbits,1
-.LASF21:
+.LASF22:
 	.string	"csr_write_simple"
 .LASF18:
 	.string	"check_output"
@@ -1200,9 +1203,9 @@ main:
 	.string	"long unsigned int"
 .LASF7:
 	.string	"short unsigned int"
-.LASF19:
-	.string	"main"
 .LASF20:
+	.string	"main"
+.LASF21:
 	.string	"irq_getmask"
 .LASF14:
 	.string	"irq_setmask"
@@ -1214,6 +1217,8 @@ main:
 	.string	"user_irq_0_ev_enable_write"
 .LASF9:
 	.string	"long long unsigned int"
+.LASF19:
+	.string	"endflag_check"
 .LASF5:
 	.string	"long long int"
 .LASF13:

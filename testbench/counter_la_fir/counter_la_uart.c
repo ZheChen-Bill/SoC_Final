@@ -165,10 +165,12 @@ void main()
 
 	//print("\n");
 	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
-	fir();
+	
+	//fir();
+	
 	//print("\n");
 	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
-
+	reg_mprj_datal = 0x003E << 16;
 	int* tmp = matmul();
 	reg_mprj_datal = *tmp << 16;
 	reg_mprj_datal = *(tmp+1) << 16;
@@ -188,13 +190,14 @@ void main()
 	reg_mprj_datal = *(tmp+7) << 16;
 	reg_mprj_datal = *(tmp+8) << 16;
 	reg_mprj_datal = *(tmp+9) << 16;	
-
+	
+	
 	endflag_check();
 
 	for(int i=0; i<64;i=i+1){
 		reg_mprj_datal = (check_output(i)) << 16; 
 	}
-
+	
 	//check();
 	
 	reg_mprj_datal = 0xAB510000;
