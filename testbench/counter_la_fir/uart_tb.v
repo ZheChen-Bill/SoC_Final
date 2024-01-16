@@ -239,9 +239,9 @@ module uart_tb;
 		#10000;
 	end
 
-	/*
+	
 	initial begin
-		
+		/*
 		wait(checkbits == 16'hAB40);
 		$display("LA Test 1 started");
 		
@@ -266,9 +266,10 @@ module uart_tb;
 		wait(checkbits == 16'hAB51);
 		$display("*[UART]uart3(end character) receive*");
 		$display("[Passed]uart and function are passed");
-		$finish;		
+		$finish;
+		*/		
 	end
-	*/
+	
 	task send_data_1;begin
 		@(posedge clock);
 		tx_start = 1;
