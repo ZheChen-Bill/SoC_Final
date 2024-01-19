@@ -13,34 +13,6 @@ void __attribute__ ( ( section ( ".mprj" ) ) ) uart_end()
     endflag = 1;
 }
 
-void __attribute__ ( ( section ( ".mprj" ) ) ) transmission(int fifo_size)
-{
-    int finish;
-	char buffer[fifo_size];
-	int idx;
-	while(1){
-		if(startflag){
-			if(((reg_uart_stat) & 0X00000002) == 0X00000002 && idx < fifo_size){
-				int data = uart_read();
-				char c = (char)data;
-				if(data == 0x0a) finish = 1;
-				buffer[idx] = c;
-				idx++;
-			}
-			else{
-				startflag = 0;
-			}
-		}
-		else(
-			uart_write_string(buffer,idx);
-			idx = 0;
-		)
-		if(idx == 0 & finish){
-			break;
-		}
-	}
-}
-
 
 void __attribute__ ( ( section ( ".mprj" ) ) ) uart_write(int n)
 {
@@ -58,10 +30,11 @@ void __attribute__ ( ( section ( ".mprj" ) ) ) uart_write_char(char c)
     reg_tx_data = c;
 }
 
-void __attribute__ ( ( section ( ".mprj" ) ) ) uart_write_string(const char *s)
+void __attribute__ ( ( section ( ".mprj" ) ) ) uart_write_string(const char *s, int idx)
 {
-    while (*s)
-        uart_write_char(*(s++));
+    for(int i=0;i<idx;i++){
+        uart_write_char(*(s+i));
+	}
 }
 
 
@@ -223,4 +196,33 @@ void __attribute__ ( ( section ( ".mprjram" ) ) ) check(){
 	while (endflag == 1){
 		break;
 	};
+}
+
+
+void __attribute__ ( ( section ( ".mprj" ) ) ) transmission(int fifo_size)
+{
+    int finish;
+	char buffer[fifo_size];
+	int idx;
+	while(1){
+		if(startflag){
+			if(((reg_uart_stat) & 0X00000002) == 0X00000002 && idx < fifo_size){
+				int data = uart_read();
+				char c = (char)data;
+				if(data == 0x0a) finish = 1;
+				buffer[idx] = c;
+				idx++;
+			}
+			else{
+				startflag = 0;
+			}
+		}
+		else{
+			uart_write_string(buffer,idx);
+			idx = 0;
+		}
+		if(idx == 0 & finish){
+			break;
+		}
+	}
 }

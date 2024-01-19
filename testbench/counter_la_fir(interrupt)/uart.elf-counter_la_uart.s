@@ -6,7 +6,7 @@
 	.text
 .Ltext0:
 	.cfi_sections	.debug_frame
-	.file 0 "/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir_not_DMA" "counter_la_uart.c"
+	.file 0 "/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir(interrupt)" "counter_la_uart.c"
 	.section	.text.startup,"ax",@progbits
 	.align	2
 	.globl	main
@@ -1273,8 +1273,8 @@ main:
 .LASF2:
 	.string	"signed char"
 	.section	.debug_line_str,"MS",@progbits,1
-.LASF1:
-	.string	"/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir_not_DMA"
 .LASF0:
 	.string	"counter_la_uart.c"
+.LASF1:
+	.string	"/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir(interrupt)"
 	.ident	"GCC: (g1ea978e3066) 12.1.0"
