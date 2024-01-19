@@ -29,8 +29,7 @@ extern void uart_write_string();
 extern void uart_reset_write_fifo();
 extern int uart_isr();
 extern int uart_read();
-extern void transmission(int fifo_size);
-extern void uart_end();
+
 extern void check();
 
 extern int* fir();
@@ -166,14 +165,45 @@ void main()
 
 	//print("\n");
 	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
+	for(int i = 0; i<64; i=i+1){
+		reg_mprj_datal = check_output(i) << 16;
+	}
 	
-	reg_mprj_datal = 0xAB400000;
+	int* tmp = fir();
+	for(int i = 0;i<64;i=i+1){
+		reg_mprj_datal = *(tmp+i) << 16;
+	}
+	//print("\n");
+	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
+	tmp = matmul();
+	reg_mprj_datal = *tmp << 16;
+	reg_mprj_datal = *(tmp+1) << 16;
+	reg_mprj_datal = *(tmp+2) << 16;
+	reg_mprj_datal = *(tmp+3) << 16;	
+	//print("\n");
+	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
 
-	int fifo_size = ?;
-	transmission(fifo_size);
-	uart_end();
-	check();
+	tmp = qsort();
+	reg_mprj_datal = *tmp << 16;
+	reg_mprj_datal = *(tmp+1) << 16;
+	reg_mprj_datal = *(tmp+2) << 16;
+	reg_mprj_datal = *(tmp+3) << 16;
+	reg_mprj_datal = *(tmp+4) << 16;
+	reg_mprj_datal = *(tmp+5) << 16;
+	reg_mprj_datal = *(tmp+6) << 16;
+	reg_mprj_datal = *(tmp+7) << 16;
+	reg_mprj_datal = *(tmp+8) << 16;
+	reg_mprj_datal = *(tmp+9) << 16;	
 	
-	reg_mprj_datal = 0xAB510000;
+	
+	//endflag_check();
+
+	//for(int i=0; i<64;i=i+1){
+	//	reg_mprj_datal = (check_output(i)) << 16; 
+	//}
+	
+	//check();
+	
+	//reg_mprj_datal = 0xAB510000;
 }
 
