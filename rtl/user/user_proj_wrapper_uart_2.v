@@ -82,32 +82,63 @@ module user_project_wrapper #(
     wire clk;
     wire rst, rst_n;
     // decode for case
-    reg [1:0] decode;
-    // axilite
+    reg [2:0] decode;
+    //------axilite------//
     wire decode_to_axilite;
     wire valid_axilite;
-    wire wbs_ack_o_axilite;
-    wire [31:0] wbs_dat_o_axilite;
     wire [2:0] user_irq_axilite;
 
+    // CPU ===> wb2axilite
+    wire        wbs_ack_o_axilite;
+    wire [31:0] wbs_dat_o_axilite;
+
     // axistream
-    wire decode_to_axistream;
-    wire valid_axistream;
+    wire valid_axistream; 
     wire wbs_ack_o_axistream;
     wire [31:0] wbs_dat_o_axistream;
     wire [2:0] user_irq_axistream;
     
 
-    // user memory
+    //------user memory------//
     wire decode_to_mem;
     wire valid;
-    wire wbs_ack_o_mem;
-    wire [31:0] wbs_dat_o_mem;
     wire [37:0] io_out_mem;
     wire [37:0] io_oeb_mem;
     wire [2:0] user_irq_mem;
 
-    //uart
+    // CPU ===> MUX2RAM
+    reg         wbs_stb_to_mem;
+    reg         wbs_cyc_to_mem;
+    reg         wbs_we_to_mem;
+    reg [3 :0]  wbs_sel_to_mem;
+    reg [31:0]  wbs_adr_to_mem;
+    reg [31:0]  wbs_dat_to_mem;
+    reg        wbs_ack_o_mem;
+    reg [31:0] wbs_dat_o_mem;
+
+    // MUX2RAM ===> RAM
+    reg         wbs_stb_to_RAM;
+    reg         wbs_cyc_to_RAM;
+    reg         wbs_we_to_RAM;
+    reg [3 :0]  wbs_sel_to_RAM;
+    reg [31:0]  wbs_adr_to_RAM;
+    reg [31:0]  wbs_dat_to_RAM;
+    wire        wbs_ack_from_RAM;
+    wire [31:0] wbs_dat_backfrom_RAM; 
+
+    /*
+    // RAM ===> MUX2RAM
+    reg         wbs_stb_from_RAM;
+    reg         wbs_cyc_from_RAM;
+    reg         wbs_we_from_RAM;
+    reg [3 :0]  wbs_sel_from_RAM;
+    reg [31:0]  wbs_adr_from_RAM;
+    reg [31:0]  wbs_dat_from_RAM;
+    wire        wbs_ack_to_RAM;
+    wire [31:0] wbs_dat_backto_RAM; 
+    */
+
+    //------UART------//
     wire decode_to_uart;
     wire wbs_ack_o_uart;
     wire [31:0] wbs_dat_o_uart;
@@ -115,41 +146,118 @@ module user_project_wrapper #(
     wire [37:0] io_oeb_uart;
     wire [2:0] user_irq_uart;
 
-    always@* begin
-        if (decode_to_mem) begin
-            decode = 2'b00;
-        end else if (decode_to_axilite) begin
-            decode = 2'b01;
-        end else if (decode_to_axistream) begin
-            decode = 2'b10;
-        end else begin
-            decode = 2'b11;
-        end  
-    end
+    
+
+    //------DMA1------//
+    wire decode_to_DMA1;
+
+    // CPU ===> DMA1
+    reg         wbs_stb_to_DMA1;
+    reg         wbs_cyc_to_DMA1;
+    reg         wbs_we_to_DMA1;
+    reg [3 :0]  wbs_sel_to_DMA1;
+    reg [31:0]  wbs_adr_to_DMA1;
+    reg [31:0]  wbs_dat_to_DMA1;
+    wire        wbs_ack_o_DMA1;
+    wire [31:0] wbs_dat_o_DMA1;
+
+    // DMA1 ===> RAM
+    wire         wbs_stb_from_DMA1;
+    wire         wbs_cyc_from_DMA1;
+    wire         wbs_we_from_DMA1;
+    wire [3:0]   wbs_sel_from_DMA1;
+    wire [31:0]  wbs_dat_from_DMA1;
+    wire [31:0]  wbs_adr_from_DMA1;
+    reg         wbs_ack_to_DMA1;
+    reg [31:0]  wbs_dat_backto_DMA1;
+
+    // DMA1 ===> FIR(wb2axis)
+    wire         wbs_stb_to_1FIR;
+    wire         wbs_cyc_to_1FIR;
+    wire         wbs_we_to_1FIR;
+    wire [3 :0]  wbs_sel_to_1FIR;
+    wire [31:0]  wbs_adr_to_1FIR;
+    wire [31:0]  wbs_dat_to_1FIR;
+    wire        wbs_ack_from_1FIR;
+    wire [31:0] wbs_dat_from_1FIR;
+
+    //------DMA2------//
+    wire decode_to_DMA2;
+
+    // CPU ===> DMA2
+    reg         wbs_stb_to_DMA2;
+    reg         wbs_cyc_to_DMA2;
+    reg         wbs_we_to_DMA2;
+    reg [3 :0]  wbs_sel_to_DMA2;
+    reg [31:0]  wbs_adr_to_DMA2;
+    reg [31:0]  wbs_dat_to_DMA2;
+    wire        wbs_ack_o_DMA2;
+    wire [31:0] wbs_dat_o_DMA2;
+
+    // DMA2 ===> RAM
+    wire         wbs_stb_from_DMA2;
+    wire         wbs_cyc_from_DMA2;
+    wire         wbs_we_from_DMA2;
+    wire [3:0]   wbs_sel_from_DMA2;
+    wire [31:0]  wbs_dat_from_DMA2;
+    wire [31:0]  wbs_adr_from_DMA2;
+    reg        wbs_ack_to_DMA2;
+    reg [31:0] wbs_dat_backto_DMA2;
+
+    // DMA2 ===> FIR(wb2axis)  
+    wire         wbs_stb_to_2FIR;
+    wire         wbs_cyc_to_2FIR;
+    wire         wbs_we_to_2FIR;
+    wire [3:0]   wbs_sel_to_2FIR;
+    wire [31:0]  wbs_dat_to_2FIR;
+    wire [31:0]  wbs_adr_to_2FIR;
+    wire          wbs_ack_from_2FIR;
+    wire [31:0]   wbs_dat_from_2FIR;
+
 
     assign decode_to_mem         = (wbs_adr_i[31:0] >= 32'h38000000 && wbs_adr_i[31:0] < 32'h38004000)  ? 1 : 0;
     assign decode_to_axilite     = (wbs_adr_i[31:0] >= 32'h30000000 && wbs_adr_i[31:0] <= 32'h3000007F) ? 1 : 0; 
-    assign decode_to_axistream   = (wbs_adr_i[31:0] == 32'h30000080 || wbs_adr_i[31:0] == 32'h30000084) ? 1 : 0; 
-    assign decode_to_uart        = (wbs_adr_i[31:0] >  32'h30000084 && wbs_adr_i[31:0] < 32'h30100000)  ? 1 : 0; 
+    assign decode_to_DMA1        = (wbs_adr_i[31:0] == 32'h30000080 || wbs_adr_i[31:0] == 32'h30000084) ? 1 : 0; 
+    assign decode_to_DMA2        = (wbs_adr_i[31:0] == 32'h30000088 || wbs_adr_i[31:0] == 32'h3000008C ) ? 1 : 0;
+    assign decode_to_uart        = (wbs_adr_i[31:0] >  32'h30000090 && wbs_adr_i[31:0] < 32'h30100000)  ? 1 : 0; 
+
+    //|| wbs_adr_i[31:0] == 32'h30000090
+    always@* begin
+        if (decode_to_mem) begin
+            decode = 3'b000;
+        end else if (decode_to_axilite) begin
+            decode = 3'b001;
+        end else if (decode_to_DMA1) begin
+            decode = 3'b010;
+        end else if (decode_to_DMA2) begin
+            decode = 3'b011;    
+        end else begin
+            decode = 3'b100;
+        end  
+    end
 
     reg        wbs_ack_o_reg;
     reg [31:0] wbs_dat_o_reg;
 
     always@* begin
         case(decode) 
-            2'b00: begin
+            3'b000: begin
                 wbs_ack_o_reg = wbs_ack_o_mem;
                 wbs_dat_o_reg = wbs_dat_o_mem;
             end
-            2'b01: begin
+            3'b001: begin
                 wbs_ack_o_reg = wbs_ack_o_axilite;
                 wbs_dat_o_reg = wbs_dat_o_axilite;
             end
-            2'b10: begin
-                wbs_ack_o_reg = wbs_ack_o_axistream;
-                wbs_dat_o_reg = wbs_dat_o_axistream;
+            3'b010: begin
+                wbs_ack_o_reg = wbs_ack_o_DMA1;
+                wbs_dat_o_reg = wbs_dat_o_DMA1;
             end
-            2'b11: begin
+            3'b011: begin
+                wbs_ack_o_reg = wbs_ack_o_DMA2;
+                wbs_dat_o_reg = wbs_dat_o_DMA2;
+            end
+            3'b100: begin
                 wbs_ack_o_reg = wbs_ack_o_uart;
                 wbs_dat_o_reg = wbs_dat_o_uart;
             end
@@ -158,6 +266,137 @@ module user_project_wrapper #(
 
     assign wbs_ack_o = wbs_ack_o_reg;
     assign wbs_dat_o = wbs_dat_o_reg;
+
+
+    always @* begin
+        if(decode_to_mem) begin
+            wbs_stb_to_mem = wbs_stb_i;
+            wbs_cyc_to_mem = wbs_cyc_i;
+            wbs_we_to_mem = wbs_we_i;
+            wbs_sel_to_mem = wbs_sel_i;
+            wbs_adr_to_mem = wbs_adr_i;
+            wbs_dat_to_mem = wbs_dat_i;
+        end 
+        else begin
+            wbs_stb_to_mem = 1'b0;
+            wbs_cyc_to_mem = 1'b0;
+            wbs_we_to_mem = 1'b0;
+            wbs_sel_to_mem = 4'b0000;
+            wbs_adr_to_mem = 32'h0;
+            wbs_dat_to_mem = 32'h0;
+        end
+    end
+
+    always @* begin
+        if(decode_to_DMA1) begin
+            wbs_stb_to_DMA1 = wbs_stb_i;
+            wbs_cyc_to_DMA1 = wbs_cyc_i;
+            wbs_we_to_DMA1 = wbs_we_i;
+            wbs_sel_to_DMA1 = wbs_sel_i;
+            wbs_adr_to_DMA1 = wbs_adr_i;
+            wbs_dat_to_DMA1 = wbs_dat_i;
+        end 
+        else begin
+            wbs_stb_to_DMA1 = 1'b0;
+            wbs_cyc_to_DMA1 = 1'b0;
+            wbs_we_to_DMA1 = 1'b0;
+            wbs_sel_to_DMA1 = 4'b0000;
+            wbs_adr_to_DMA1 = 32'h0;
+            wbs_dat_to_DMA1 = 32'h0;
+        end
+    end
+
+    always @* begin
+        if(decode_to_DMA2) begin
+            wbs_stb_to_DMA2 = wbs_stb_i;
+            wbs_cyc_to_DMA2 = wbs_cyc_i;
+            wbs_we_to_DMA2 = wbs_we_i;
+            wbs_sel_to_DMA2 = wbs_sel_i;
+            wbs_adr_to_DMA2 = wbs_adr_i;
+            wbs_dat_to_DMA2 = wbs_dat_i;
+        end 
+        else begin
+            wbs_stb_to_DMA2 = 1'b0;
+            wbs_cyc_to_DMA2 = 1'b0;
+            wbs_we_to_DMA2 = 1'b0;
+            wbs_sel_to_DMA2 = 4'b0000;
+            wbs_adr_to_DMA2 = 32'h0;
+            wbs_dat_to_DMA2 = 32'h0;
+        end
+    end
+
+    //MUX for input of RAM (DMA1 or DMA2 or CPU)
+    always @* begin
+        if(wbs_stb_from_DMA2) begin
+            wbs_stb_to_RAM = wbs_stb_from_DMA2;
+            wbs_cyc_to_RAM = wbs_cyc_from_DMA2;
+            wbs_we_to_RAM = wbs_we_from_DMA2;
+            wbs_sel_to_RAM = wbs_sel_from_DMA2;
+            wbs_dat_to_RAM = wbs_dat_from_DMA2;
+            wbs_adr_to_RAM = wbs_adr_from_DMA2;
+        end
+        else if(wbs_stb_from_DMA1) begin
+            wbs_stb_to_RAM = wbs_stb_from_DMA1;
+            wbs_cyc_to_RAM = wbs_cyc_from_DMA1;
+            wbs_we_to_RAM = wbs_we_from_DMA1;
+            wbs_sel_to_RAM = wbs_sel_from_DMA1;
+            wbs_dat_to_RAM = wbs_dat_from_DMA1;
+            wbs_adr_to_RAM = wbs_adr_from_DMA1;
+        end
+        else if(wbs_stb_to_mem) begin
+            wbs_stb_to_RAM = wbs_stb_to_mem;
+            wbs_cyc_to_RAM = wbs_cyc_to_mem;
+            wbs_we_to_RAM = wbs_we_to_mem;
+            wbs_sel_to_RAM = wbs_sel_to_mem;
+            wbs_dat_to_RAM = wbs_dat_to_mem;
+            wbs_adr_to_RAM = wbs_adr_to_mem;
+        end
+        else begin
+            wbs_stb_to_RAM = 1'b0;
+            wbs_cyc_to_RAM = 1'b0;
+            wbs_we_to_RAM = 1'b0;
+            wbs_sel_to_RAM = 4'b0000;
+            wbs_dat_to_RAM = 32'h0;
+            wbs_adr_to_RAM = 32'h0;
+        end
+    end
+
+    //MUX for output of RAM (DMA1 or DMA2 or CPU)
+    always @* begin
+        if(wbs_stb_from_DMA2) begin
+            wbs_ack_to_DMA1 = 1'b0;
+            wbs_dat_backto_DMA1 = 32'h0;
+            wbs_ack_to_DMA2 = wbs_ack_from_RAM;
+            wbs_dat_backto_DMA2 = wbs_dat_backfrom_RAM;
+            wbs_ack_o_mem = 1'b0;
+            wbs_dat_o_mem = 32'h0;
+        end
+        else if(wbs_stb_from_DMA1) begin
+            wbs_ack_to_DMA1 = wbs_ack_from_RAM;
+            wbs_dat_backto_DMA1 = wbs_dat_backfrom_RAM;
+            wbs_ack_to_DMA2 = 1'b0;
+            wbs_dat_backto_DMA2 = 32'h0;
+            wbs_ack_o_mem = 1'b0;
+            wbs_dat_o_mem = 32'h0;
+        end
+        else if(wbs_stb_to_mem) begin
+            wbs_ack_to_DMA1 = 1'b0;
+            wbs_dat_backto_DMA1 = 32'h0;
+            wbs_ack_to_DMA2 = 1'b0;
+            wbs_dat_backto_DMA2 = 32'h0;
+            wbs_ack_o_mem = wbs_ack_from_RAM;
+            wbs_dat_o_mem = wbs_dat_backfrom_RAM;
+        end
+        else begin
+            wbs_ack_to_DMA1 = 1'b0;
+            wbs_dat_backto_DMA1 = 32'h0;
+            wbs_ack_to_DMA2 = 1'b0;
+            wbs_dat_backto_DMA2 = 32'h0;
+            wbs_ack_o_mem = 1'b0;
+            wbs_dat_o_mem = 32'h0;
+        end
+    end
+
 
 /*--------------------------------------*/
 /* User project is instantiated  here   */
@@ -272,15 +511,23 @@ uart uart (
     wire     [(11):0] data_A;
     wire [(BITS-1):0] data_Do;
 
+    wire         wbs_stb_to_FIR;
+    wire         wbs_cyc_to_FIR;
+    wire         wbs_we_to_FIR;
+    wire [3:0]   wbs_sel_to_FIR;
+    wire [31:0]  wbs_dat_to_FIR;
+    wire [31:0]  wbs_adr_to_FIR;
+    
+
     wb_axistream wb_axistream(
         .clk(clk),
         .rst(rst),
 
-        .wbs_adr_i(wbs_adr_i),
+        .wbs_adr_i(wbs_adr_to_FIR),
         .wb_valid(valid_axistream),
         .wb_ready(wbs_ack_o_axistream),
-        .wbs_we_i(wbs_we_i),
-        .wbs_dat_i(wbs_dat_i),
+        .wbs_we_i(wbs_we_to_FIR),
+        .wbs_dat_i(wbs_dat_to_FIR),
         .wbs_dat_o(wbs_dat_o_axistream),
 
         .sm_tvalid(sm_tvalid), //from master(wb_axistream) to slave(fir)
@@ -291,6 +538,45 @@ uart uart (
         .ss_tready(ss_tready),
         .ss_tdata (ss_tdata)
     );
+    
+    wire [31:0]      FIR_input_cnt;
+    /*
+    always @* begin
+        //if((~priority_DMA && wbs_we_to_FIR)) begin
+        if(wbs_we_to_FIR) begin
+            wbs_ack_from_1FIR = wbs_ack_o_axistream;
+            wbs_dat_from_1FIR = wbs_dat_o_axistream;
+            wbs_ack_from_2FIR = 1'b0;
+            wbs_dat_from_2FIR = 32'h0;
+        end
+        else begin
+            wbs_ack_from_1FIR = 1'b0;
+            wbs_dat_from_1FIR = 32'h0;
+            wbs_ack_from_2FIR = wbs_ack_o_axistream;
+            wbs_dat_from_2FIR = wbs_dat_o_axistream;
+        end
+    end
+    */
+
+    
+    assign wbs_ack_from_1FIR = (wbs_we_to_FIR)? wbs_ack_o_axistream : 1'b0;
+    assign wbs_dat_from_1FIR = (wbs_we_to_FIR)? wbs_dat_o_axistream : 32'h0;
+    assign wbs_ack_from_2FIR = (wbs_we_to_FIR)? 1'b0 : wbs_ack_o_axistream;
+    assign wbs_dat_from_2FIR = (wbs_we_to_FIR)? 32'h0 : wbs_dat_o_axistream;
+    
+    assign wbs_stb_to_FIR = wbs_stb_to_1FIR || wbs_stb_to_2FIR;
+    assign wbs_cyc_to_FIR = wbs_cyc_to_1FIR || wbs_cyc_to_2FIR;
+    assign wbs_we_to_FIR = (wbs_stb_to_1FIR && wbs_stb_to_2FIR && FIR_input_cnt == 32'b1)? wbs_we_to_1FIR :
+                            (wbs_stb_to_1FIR && wbs_stb_to_2FIR)? wbs_we_to_2FIR : wbs_we_to_1FIR;
+    //assign wbs_we_to_FIR = wbs_we_to_1FIR || wbs_we_to_2FIR;
+    assign wbs_sel_to_FIR = wbs_sel_to_1FIR || wbs_sel_to_2FIR;
+    assign wbs_dat_to_FIR = (wbs_we_to_FIR)? wbs_dat_to_1FIR : wbs_dat_to_2FIR ;
+    assign wbs_adr_to_FIR = (wbs_we_to_FIR)? wbs_adr_to_1FIR : wbs_adr_to_2FIR ;
+
+    assign valid_axistream = (wbs_stb_to_FIR && wbs_cyc_to_FIR) ;
+    assign user_irq_axistream = 3'b000; //Unused
+
+    
     // RAM for data: choose bram11
     bram11 data_RAM(
         .clk(clk),
@@ -301,8 +587,7 @@ uart uart (
         .wdi(data_Di),
         .rdo(data_Do)
     );
-    assign valid_axistream = wbs_stb_i && wbs_cyc_i && decode_to_axistream;
-    assign user_irq_axistream = 3'b000; //Unused
+    
 // fir =================================================
     fir fir_DUT(
         .awready(awready),
@@ -348,6 +633,7 @@ uart uart (
     );
     
 //user project bram =================================================
+
     wire sdram_cle;
     wire sdram_cs;
     wire sdram_cas;
@@ -368,12 +654,12 @@ uart uart (
 
     // WB MI A
     
-    assign valid = wbs_stb_i && wbs_cyc_i && decode_to_mem;
+    assign valid = wbs_stb_to_RAM && wbs_cyc_to_RAM; //&& (decode_to_mem || decode_to_DMA1 || decode_to_DMA2);
 
-    assign ctrl_in_valid = wbs_we_i ? valid : ~ctrl_in_valid_q && valid;
-    assign wbs_ack_o_mem = (wbs_we_i) ? ~ctrl_busy && valid : ctrl_out_valid; 
-    assign bram_mask = wbs_sel_i & {4{wbs_we_i}};
-    assign ctrl_addr = wbs_adr_i[22:0];
+    assign ctrl_in_valid = wbs_we_to_RAM ? valid : ~ctrl_in_valid_q && valid;
+    assign wbs_ack_from_RAM = (wbs_we_to_RAM) ? ~ctrl_busy && valid : ctrl_out_valid; 
+    assign bram_mask = wbs_sel_to_RAM & {4{wbs_we_to_RAM}};
+    assign ctrl_addr = wbs_adr_to_RAM[22:0];
 
     // IO
     assign io_out_mem = d2c_data;
@@ -386,18 +672,19 @@ uart uart (
     assign la_data_out = {{(127-BITS){1'b0}}, d2c_data};
     // Assuming LA probes [63:32] are for controlling the count register  
     assign la_write = ~la_oenb[63:32] & ~{BITS{valid}};
+
     // Assuming LA probes [65:64] are for controlling the count clk & reset  
     assign clk = (~la_oenb[64]) ? la_data_in[64]: wb_clk_i;
     assign rst = (~la_oenb[65]) ? la_data_in[65]: wb_rst_i;
     assign rst_n = ~rst;
 
-    
+
     always @(posedge clk) begin
         if (rst) begin
             ctrl_in_valid_q <= 1'b0;
         end
         else begin
-            if (~wbs_we_i && valid && ~ctrl_busy && ctrl_in_valid_q == 1'b0)
+            if (~wbs_we_to_RAM && valid && ~ctrl_busy && ctrl_in_valid_q == 1'b0)
                 ctrl_in_valid_q <= 1'b1;
             else if (ctrl_out_valid)
                 ctrl_in_valid_q <= 1'b0;
@@ -420,12 +707,13 @@ uart uart (
         .sdram_dqo(c2d_data),
 
         .user_addr(ctrl_addr),
-        .rw(wbs_we_i),
-        .data_in(wbs_dat_i),
-        .data_out(wbs_dat_o_mem),
+        .rw(wbs_we_to_RAM),
+        .data_in(wbs_dat_to_RAM),
+        .data_out(wbs_dat_backfrom_RAM),
         .busy(ctrl_busy),
         .in_valid(ctrl_in_valid),
         .out_valid(ctrl_out_valid)
+
     );
 
     sdr user_bram (
@@ -443,6 +731,90 @@ uart uart (
         .Dqo(d2c_data)
     );
 
+    DMA1 DMA1(
+        .clk(clk),
+        .rst(rst),
+
+        .wbs_stb_from_CPU(wbs_stb_to_DMA1),
+        .wbs_cyc_from_CPU(wbs_cyc_to_DMA1),
+        .wbs_we_from_CPU(wbs_we_to_DMA1),
+        .wbs_sel_from_CPU(wbs_sel_to_DMA1),
+        .wbs_adr_from_CPU(wbs_adr_to_DMA1),
+        .wbs_dat_from_CPU(wbs_dat_to_DMA1),
+        .wbs_ack_to_CPU(wbs_ack_o_DMA1),
+        .wbs_dat_to_CPU(wbs_dat_o_DMA1),
+
+        .wbs_stb_to_RAM(wbs_stb_from_DMA1),
+        .wbs_cyc_to_RAM(wbs_cyc_from_DMA1),
+        .wbs_we_to_RAM(wbs_we_from_DMA1),
+        .wbs_sel_to_RAM(wbs_sel_from_DMA1),
+        .wbs_adr_to_RAM(wbs_adr_from_DMA1),
+        .wbs_dat_to_RAM(wbs_dat_from_DMA1),
+        .wbs_ack_from_RAM(wbs_ack_to_DMA1),
+        .wbs_dat_from_RAM(wbs_dat_backto_DMA1),
+
+        .wbs_stb_to_FIR(wbs_stb_to_1FIR),
+        .wbs_cyc_to_FIR(wbs_cyc_to_1FIR),
+        .wbs_we_to_FIR(wbs_we_to_1FIR),
+        .wbs_sel_to_FIR(wbs_sel_to_1FIR),
+        .wbs_adr_to_FIR(wbs_adr_to_1FIR),
+        .wbs_dat_to_FIR(wbs_dat_to_1FIR),
+        .wbs_ack_from_FIR(wbs_ack_from_1FIR),
+        .wbs_dat_from_FIR(wbs_dat_from_1FIR),
+
+        .length_cnt(FIR_input_cnt)
+  );
+
+    
+
+    DMA2 DMA2(
+        .clk(clk),
+        .rst(rst),
+
+        .wbs_stb_from_CPU(wbs_stb_to_DMA2),
+        .wbs_cyc_from_CPU(wbs_cyc_to_DMA2),
+        .wbs_we_from_CPU(wbs_we_to_DMA2),
+        .wbs_sel_from_CPU(wbs_sel_to_DMA2),
+        .wbs_adr_from_CPU(wbs_adr_to_DMA2),
+        .wbs_dat_from_CPU(wbs_dat_to_DMA2),
+        .wbs_ack_to_CPU(wbs_ack_o_DMA2),
+        .wbs_dat_to_CPU(wbs_dat_o_DMA2),
+
+        .wbs_stb_to_RAM(wbs_stb_from_DMA2),
+        .wbs_cyc_to_RAM(wbs_cyc_from_DMA2),
+        .wbs_we_to_RAM(wbs_we_from_DMA2),
+        .wbs_sel_to_RAM(wbs_sel_from_DMA2),
+        .wbs_adr_to_RAM(wbs_adr_from_DMA2),
+        .wbs_dat_to_RAM(wbs_dat_from_DMA2),
+        .wbs_ack_from_RAM(wbs_ack_to_DMA2),
+        .wbs_dat_from_RAM(wbs_dat_backto_DMA2),
+
+        .wbs_stb_to_FIR(wbs_stb_to_2FIR),
+        .wbs_cyc_to_FIR(wbs_cyc_to_2FIR),
+        .wbs_we_to_FIR(wbs_we_to_2FIR),
+        .wbs_sel_to_FIR(wbs_sel_to_2FIR),
+        .wbs_adr_to_FIR(wbs_adr_to_2FIR),
+        .wbs_dat_to_FIR(wbs_dat_to_2FIR),
+        .wbs_ack_from_FIR(wbs_ack_from_2FIR),
+        .wbs_dat_from_FIR(wbs_dat_from_2FIR)
+  );
+
+
+    /*
+    arbiter arbiter(
+        .clk(clk),
+        .rst(rst),
+
+        .wbs_stb_from_CPU(wbs_stb_to_mem),
+        .wbs_cyc_from_CPU(wbs_cyc_to_mem),
+        .wbs_we_from_CPU(wbs_we_to_mem),
+        .wbs_sel_from_CPU(wbs_sel_to_mem),
+        .wbs_dat_from_CPU(wbs_dat_to_mem),
+        .wbs_adr_from_CPU(wbs_adr_to_mem),
+        .wbs_ack_to_CPU(wbs_ack_o_mem),
+        .wbs_dat_to_CPU(wbs_dat_o_mem)
+    );
+    */
 
 endmodule
 

@@ -10,6 +10,7 @@
 -v ../../rtl/user/uart_ctrl.v
 -v ../../rtl/user/sdr.v
 -v ../../rtl/user/sdram_controller.v
+##-v ../../rtl/user/sdram_controller_prefetch.v
 -v ../../rtl/user/wb_axistream.v
 -v ../../rtl/user/wb_axilite.v
 -v ../../rtl/user/fir.v
@@ -17,6 +18,9 @@
 -v ../../rtl/user/axi_stream.v
 -v ../../rtl/user/booth.v
 -v ../../rtl/user/bram11.v
+-v ../../rtl/user/fifo.v
+-v ../../rtl/user/DMA1.v
+-v ../../rtl/user/DMA2.v
 
 ##-v ../../rtl/user/bram.v
 ##-v ../../rtl/user/user_project_wrapper.v

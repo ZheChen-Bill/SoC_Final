@@ -72,58 +72,52 @@ module wb_axistream
     reg [pDATA_WIDTH-1:0] inputbuffer;
 
     // the return signal from fir to wb
-    always@(posedge clk) begin
+    always@* begin
         if (rst) begin
-            wb_ready  <= 1'b0;
-            wbs_dat_o <= 32'h0;
+            wb_ready  = 1'b0;
+            wbs_dat_o = 32'h0;
         end else begin
             if (wb_valid && !wb_ready) begin
-                    if ((wbs_adr_i == 32'h30000080) && wbs_we_i) begin
-                        wb_ready  <= sm_tready;
-                        wbs_dat_o <= 32'h0;
-                    end else if ((wbs_adr_i == 32'h30000080) && (!wbs_we_i)) begin
-                        wb_ready  <= 1'b1;
-                        wbs_dat_o <= inputbuffer;
-                    end else if ((wbs_adr_i == 32'h30000084) && (!wbs_we_i)) begin
-                        wb_ready  <= ss_tvalid;
-                        wbs_dat_o <= ss_tdata;
-                    end else if ((wbs_adr_i == 32'h30000084) && (wbs_we_i)) begin
-                        wb_ready  <= 1'b1;
-                        wbs_dat_o <= 32'h0;
-                    end else begin
-                        wb_ready  <= 1'b0;
-                        wbs_dat_o <= 32'h0;
+                    if ((wbs_adr_i == 32'h30000080)) begin
+                        wb_ready  = sm_tready;
+                        wbs_dat_o = 32'h0;
+                    end else if (wbs_adr_i == 32'h30000084) begin
+                        wb_ready  = ss_tvalid;
+                        wbs_dat_o = ss_tdata;
+                    end /*else if ((wbs_adr_i == 32'h30000084) && (wbs_we_i)) begin
+                        wb_ready  = 1'b1;
+                        wbs_dat_o = 32'h0;
+                        end */
+                    else begin
+                        wb_ready  = 1'b0;
+                        wbs_dat_o = 32'h0;
                     end
                 end else begin
-                    wb_ready  <= 1'b0;
-                    wbs_dat_o <= 32'h0;
+                    wb_ready  = 1'b0;
+                    wbs_dat_o = 32'h0;
                 end
             end
         end 
 
     // the input signal from wb to fir
-    always@(posedge clk) begin
+    always@* begin
         if (rst) begin
-            sm_tvalid <= 1'b0;
-            sm_tdata  <= 32'h0;
-            ss_tready <= 1'b0;
+            sm_tvalid = 1'b0;
+            sm_tdata  = 32'h0;
+            ss_tready = 1'b0;
         end else begin 
-            if ((wbs_adr_i == 32'h30000080) && wbs_we_i) begin
-                sm_tvalid <= wb_valid;
-                sm_tdata  <= wbs_dat_i;
-                ss_tready <= 1'b0;
-            end else if ((wbs_adr_i == 32'h30000080) && (!wbs_we_i)) begin
-                sm_tvalid <= 1'b0;
-                sm_tdata  <= 32'h0;
-                ss_tready <= 1'b0;
-            end else if ((wbs_adr_i == 32'h30000084) && (!wbs_we_i)) begin
-                sm_tvalid <= 1'b0;
-                sm_tdata  <= 32'h0;
-                ss_tready <= wb_valid;
+            if ((wbs_adr_i == 32'h30000080)) begin
+                sm_tvalid = wb_valid;
+                sm_tdata  = wbs_dat_i;
+                ss_tready = 1'b0;
+            end else if (wbs_adr_i == 32'h30000084) begin
+                sm_tvalid = 1'b0;
+                sm_tdata  = 32'h0;
+                ss_tready = wb_valid;
             end else begin
-                sm_tvalid <= 1'b0;
-                sm_tdata  <= wbs_dat_i;
-                ss_tready <= 1'b0;
+                sm_tvalid = 1'b0;
+                sm_tdata  = wbs_dat_i;
+                ss_tready = 1'b0;
             end
         end
     end

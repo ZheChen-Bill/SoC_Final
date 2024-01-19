@@ -140,9 +140,11 @@ module uart_tb;
 	`endif 
 
 	initial begin
+
 		$dumpfile("uart.vcd");
 		$dumpvars(0, uart_tb);
-
+		
+		
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
 		repeat (1000) begin
 			repeat (1000) @(posedge clock);
@@ -155,6 +157,7 @@ module uart_tb;
 			$display ("Monitor: Timeout, Test LA (RTL) Failed");
 		`endif
 		$display("%c[0m",27);
+
 		$finish;
 	end
 
@@ -237,14 +240,15 @@ module uart_tb;
 		$display("================");
 
 		#10000;
+		//$finish;
 	end
 
 	
 	initial begin
-		/*
+		
 		wait(checkbits == 16'hAB40);
 		$display("LA Test 1 started");
-		
+		/*
 		$display("***********");
 		$display("*[UART]uart1 start*");
 		$display("***********");

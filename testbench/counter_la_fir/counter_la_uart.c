@@ -34,6 +34,7 @@ extern void check();
 
 extern void fir();
 extern void endflag_check();
+extern int  check_input(int index);
 extern int  check_output(int index);
 extern int* matmul();
 extern int* qsort();
@@ -165,12 +166,15 @@ void main()
 
 	//print("\n");
 	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
+	for(int i=0; i<64;i=i+1){
+		reg_mprj_datal = (check_input(i)) << 16; 
+	}
 	
-	//fir();
+	fir();
 	
 	//print("\n");
 	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
-	reg_mprj_datal = 0x003E << 16;
+	reg_mprj_datal = 0x003E0000;
 	int* tmp = matmul();
 	reg_mprj_datal = *tmp << 16;
 	reg_mprj_datal = *(tmp+1) << 16;

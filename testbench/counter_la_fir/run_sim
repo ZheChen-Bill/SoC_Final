@@ -1,6 +1,6 @@
 rm -f uart.hex
 
-riscv32-unknown-elf-gcc -Os -Wl,--no-warn-rwx-segments -g \
+riscv32-unknown-elf-gcc -Wl,--no-warn-rwx-segments -g \
 	--save-temps \
 	-Xlinker -Map=output.map \
 	-I../../firmware \
