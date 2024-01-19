@@ -9,14 +9,11 @@
 int data_length = 64;
 int taps[N] = {0,-10,-9,23,56,63,56,23,-9,-10,0};
 int reg_fir_y;
+int reg_fir_x;
 
-volatile INPUTDATA int inputsignal[M] = {0,1,2,3,4,5,6,7,8,9,10,
-										11,12,13,14,15,16,17,18,19,20,
-										21,22,23,24,25,26,27,28,29,30,
-										31,32,33,34,35,36,37,38,39,40,
-										41,42,43,44,45,46,47,48,49,50,
-										51,52,53,54,55,56,57,58,59,60,
-										61,62,63};
+volatile INPUTDATA int inputsignal[M] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
+					  31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,
+					  59,60,61,62,63,64};
 volatile OUTPUTDATA int outputsignal[M];
 
 #define write(address,data) (*(volatile int32_t*) (address)) = data
@@ -24,11 +21,13 @@ volatile OUTPUTDATA int outputsignal[M];
 #define ap_control_address  0x30000000
 #define data_length_address 0x30000010
 #define tap_base            0x30000020
-#define DMA1_address        0x30000080
-#define DMA1_length         0x30000084
-#define DMA2_address        0x30000088
-#define DMA2_length         0x3000008C
-#define endflag_address     0x30000090
+#define input_address       0x30000080
+#define output_address      0x30000084
+#define DMA1_address        0x38003000
+#define DMA1_length         0x38003004
+#define DMA2_address        0x38003008
+#define DMA2_length         0x3800300C
+#define endflag_address     0x38003010
 #define input_base          0x38001000
 #define output_base         0x38002000
 /*

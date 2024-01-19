@@ -6,7 +6,7 @@
 	.text
 .Ltext0:
 	.cfi_sections	.debug_frame
-	.file 0 "/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir" "fir.c"
+	.file 0 "/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir_lab4_1" "fir.c"
 	.globl	taps
 	.data
 	.align	2
@@ -102,7 +102,7 @@ inputsignal:
 	.word	63
 	.word	64
 	.globl	outputsignal
-	.section	.mprjram,"aw"
+	.section	.outdata,"aw"
 	.align	2
 	.type	outputsignal, @object
 	.size	outputsignal, 256
@@ -181,14 +181,14 @@ C:
 	.size	endflag, 4
 endflag:
 	.word	1
-	.section	.outputdata,"ax",@progbits
+	.section	.mprjram,"ax",@progbits
 	.align	2
 	.globl	initfir
 	.type	initfir, @function
 initfir:
 .LFB0:
 	.file 1 "fir.c"
-	.loc 1 3 64
+	.loc 1 3 61
 	.cfi_startproc
 	addi	sp,sp,-32
 	.cfi_def_cfa_offset 32
@@ -244,7 +244,7 @@ initfir:
 	.type	firfilter, @function
 firfilter:
 .LFB1:
-	.loc 1 10 79
+	.loc 1 10 76
 	.cfi_startproc
 	addi	sp,sp,-48
 	.cfi_def_cfa_offset 48
@@ -354,7 +354,7 @@ firfilter:
 	.type	fir, @function
 fir:
 .LFB2:
-	.loc 1 23 59
+	.loc 1 23 56
 	.cfi_startproc
 	addi	sp,sp,-32
 	.cfi_def_cfa_offset 32
@@ -500,7 +500,7 @@ fir:
 	.byte	0
 	.byte	0x5
 	.string	"A"
-	.byte	0x19
+	.byte	0x18
 	.byte	0x6
 	.4byte	0xa2
 	.byte	0x5
@@ -508,7 +508,7 @@ fir:
 	.4byte	A
 	.byte	0x5
 	.string	"B"
-	.byte	0x1e
+	.byte	0x1d
 	.byte	0x6
 	.4byte	0xa2
 	.byte	0x5
@@ -516,7 +516,7 @@ fir:
 	.4byte	B
 	.byte	0x1
 	.4byte	.LASF7
-	.byte	0x23
+	.byte	0x22
 	.byte	0x6
 	.4byte	0xa2
 	.byte	0x5
@@ -531,7 +531,7 @@ fir:
 	.byte	0
 	.byte	0x5
 	.string	"C"
-	.byte	0x27
+	.byte	0x26
 	.byte	0x5
 	.4byte	0xe1
 	.byte	0x5
@@ -539,7 +539,7 @@ fir:
 	.4byte	C
 	.byte	0x1
 	.4byte	.LASF8
-	.byte	0x29
+	.byte	0x28
 	.byte	0x5
 	.4byte	0x3d
 	.byte	0x5
@@ -549,7 +549,7 @@ fir:
 	.string	"fir"
 	.byte	0x1
 	.byte	0x17
-	.byte	0x36
+	.byte	0x33
 	.4byte	0x141
 	.4byte	.LFB2
 	.4byte	.LFE2-.LFB2
@@ -575,7 +575,7 @@ fir:
 	.4byte	.LASF11
 	.byte	0x1
 	.byte	0xa
-	.byte	0x35
+	.byte	0x32
 	.4byte	0x3d
 	.4byte	.LFB1
 	.4byte	.LFE1-.LFB1
@@ -586,7 +586,7 @@ fir:
 	.4byte	.LASF12
 	.byte	0x1
 	.byte	0xa
-	.byte	0x43
+	.byte	0x40
 	.4byte	0x3d
 	.byte	0x2
 	.byte	0x91
@@ -628,7 +628,7 @@ fir:
 	.4byte	.LASF13
 	.byte	0x1
 	.byte	0x3
-	.byte	0x36
+	.byte	0x33
 	.4byte	.LFB0
 	.4byte	.LFE0-.LFB0
 	.byte	0x1
@@ -983,5 +983,5 @@ fir:
 .LASF0:
 	.string	"fir.c"
 .LASF1:
-	.string	"/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir"
+	.string	"/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir_lab4_1"
 	.ident	"GCC: (g1ea978e3066) 12.1.0"

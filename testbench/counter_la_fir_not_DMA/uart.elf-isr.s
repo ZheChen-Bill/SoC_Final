@@ -6,7 +6,7 @@
 	.text
 .Ltext0:
 	.cfi_sections	.debug_frame
-	.file 0 "/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir" "../../firmware/isr.c"
+	.file 0 "/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir_not_DMA" "../../firmware/isr.c"
 	.align	2
 	.globl	isr
 	.type	isr, @function
@@ -877,7 +877,7 @@ counter:
 	.string	"irq_pending"
 	.section	.debug_line_str,"MS",@progbits,1
 .LASF1:
-	.string	"/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir"
+	.string	"/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir_not_DMA"
 .LASF0:
 	.string	"../../firmware/isr.c"
 	.ident	"GCC: (g1ea978e3066) 12.1.0"

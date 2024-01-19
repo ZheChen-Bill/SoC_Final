@@ -1,5 +1,5 @@
 # 0 "../../firmware/crt0_vex.S"
-# 1 "/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir//"
+# 1 "/home/ubuntu/SoC_Design/Final/testbench/counter_la_fir_not_DMA//"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "../../firmware/crt0_vex.S"

@@ -9,7 +9,7 @@
 -v ../../rtl/user/uart_rx.v 
 -v ../../rtl/user/uart_ctrl.v
 -v ../../rtl/user/sdr.v
--v ../../rtl/user/sdram_controller.v
+-v ../../rtl/user/sdram_controller_prefetch.v
 -v ../../rtl/user/wb_axistream.v
 -v ../../rtl/user/wb_axilite.v
 -v ../../rtl/user/fir.v

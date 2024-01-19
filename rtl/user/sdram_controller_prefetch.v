@@ -135,47 +135,47 @@ module sdram_controller (
     // assign out_valid = out_valid_q;
 
     // signal for prefetch buffer
-    reg in_valid1, in_valid2, in_valid3;
-    reg prefetch;
-    reg addr_flag;
-    reg out_not;
-    reg in_req;
-    reg read_req;
+    
+    reg in_valid_d1, in_valid_d2, in_valid_d3;
+    reg [2:0] prefetch;
+    reg prefetch_control;
+    reg output_control;
+    reg record; //record read command
+    reg read_command;
 
-    assign out_valid = out_valid_q & !out_not & in_req;
-
+    assign out_valid = out_valid_q &  output_control & record ;
 
     always@(posedge clk) begin
         if (rst) begin
-            out_not <= 1'b0;
+            output_control <= 1'b0;
         end else if (out_valid_q) begin
-            out_not <= 1'b0;
-        end else if (in_valid & addr_flag &(addr != saved_addr_q)) begin
-            out_not <= 1'b1;
+            output_control <= 1'b1;
+        end else if (in_valid & prefetch_control & (addr != saved_addr_q)) begin
+            output_control <= 1'b0;
         end else begin
-            out_not <= out_not;
+            output_control <= output_control;
         end 
     end
 
     always@(posedge clk) begin
         if (rst) begin
-            in_req <= 1'b0;
+            record <= 1'b0;
         end else if (out_valid) begin
-            in_req <= 1'b0;
-        end else if (read_req) begin
-            in_req <= 1'b1;
+            record <= 1'b0;
+        end else if (read_command) begin
+            record <= 1'b1;
         end else begin
-            in_req <= in_req;
+            record <= record;
         end 
     end
 
     always@(posedge clk) begin
         if (rst) begin
-            prefetch <= 1'b0;
-        end else if (~in_req | out_not) begin
-            prefetch <= 1'b0;
-        end else if (in_valid2) begin
-            prefetch <= 1'b1;
+            prefetch <= 3'd0;
+        end else if (~record | ~output_control) begin
+            prefetch <= 3'd0;
+        end else if (in_valid_d2) begin
+            prefetch <= 3'd4;
         end else begin
             prefetch <= prefetch;
         end
@@ -183,24 +183,35 @@ module sdram_controller (
 
     always@(posedge clk) begin
         if (rst) begin
-            addr_flag <= 1'b0;
-        end else if (in_req & (state_q == IDLE) & (!ready_q)) begin
-            addr_flag <= 1'b1;
+            prefetch_control <= 1'b0;
+        end else if (record & (state_q == IDLE) & (!ready_q)) begin
+            prefetch_control <= 1'b1;
         end else if (out_valid_q) begin
-            addr_flag <= 1'b0;
+            prefetch_control <= 1'b0;
         end else begin
-            addr_flag <= addr_flag;
+            prefetch_control <= prefetch_control;
         end
     end
 
     always@* begin
         if (in_valid & ~rw) begin
-            read_req = 1'b1;
+            read_command = 1'b1;
         end else begin
-            read_req = 1'b0;
+            read_command = 1'b0;
         end
     end
 
+    always@(posedge clk) begin
+        if (rst) begin
+            in_valid_d1 <= 1'b0;
+            in_valid_d2 <= 1'b0;
+            in_valid_d3 <= 1'b0;
+        end else begin
+            in_valid_d1 <= read_command;
+            in_valid_d2 <= in_valid_d1;
+            in_valid_d3 <= in_valid_d2;
+        end
+    end
 
     always @* begin
         // Default values
@@ -256,11 +267,18 @@ module sdram_controller (
         */
 
         // set for prefetch buffer
-        if (ready_q && (in_valid | in_valid3)) begin
+        if (ready_q & (in_valid | in_valid_d3)) begin
+            if (in_valid) begin
             saved_rw_d = rw;
             saved_data_d = data_in;
-            saved_addr_d = addr + {prefetch, 2'b0};
+            saved_addr_d = addr;
             ready_d = 1'b0;
+            end else if (in_valid_d3) begin
+            saved_rw_d = rw;
+            saved_data_d = data_in;
+            saved_addr_d = addr + prefetch;
+            ready_d = 1'b0;   
+            end
         end
 
         case (state_q)
@@ -438,23 +456,12 @@ module sdram_controller (
             dq_en_q <= 1'b0;
             state_q <= INIT;
             ready_q <= 1'b0;
-            // prefetch buffer rst
-            
-            in_valid1 <= 1'b0;
-            in_valid2 <= 1'b0;
-            in_valid3 <= 1'b0;
             
         end else begin
             cle_q <= cle_d;
             dq_en_q <= dq_en_d;
             state_q <= state_d;
-            ready_q <= ready_d;
-            // prefetch buffer change state
-            
-            in_valid1 <= read_req;
-            in_valid2 <= in_valid1;
-            in_valid3 <= in_valid2;
-            
+            ready_q <= ready_d;            
         end
 
         saved_rw_q <= saved_rw_d;

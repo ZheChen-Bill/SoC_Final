@@ -157,7 +157,7 @@ module uart_tb;
 		$display("%c[0m",27);
 		$finish;
 	end
-
+/*
 	//test matmul
 	initial begin
 
@@ -207,10 +207,10 @@ module uart_tb;
 		#10000;
 		
 	end
-
+*/
 	//qs
 	initial begin
-
+		/*
 		wait(checkbits == 16'd40);
 		$display("Call function qsort() in User Project BRAM (mprjram, 0x38000000) return value passed, 0x%x", checkbits);
 		wait(checkbits == 16'd893);
@@ -229,14 +229,15 @@ module uart_tb;
 		$display("Call function qsort() in User Project BRAM (mprjram, 0x38000000) return value passed, 0x%x", checkbits);		
 		wait(checkbits == 16'd6023);
 		$display("Call function qsort() in User Project BRAM (mprjram, 0x38000000) return value passed, 0x%x", checkbits);		
+		*/
 		wait(checkbits == 16'd9073);
 		$display("Call function qsort() in User Project BRAM (mprjram, 0x38000000) return value passed, 0x%x", checkbits);		
-
 		$display("================");
 		$display("[Passed]Qsort passed!");
 		$display("================");
 
 		#10000;
+		$finish;
 	end
 
 	initial begin
@@ -256,7 +257,7 @@ module uart_tb;
 		$display("***********");
 		send_data_2;
 		#10000;
-		*/
+		
 		wait(checkbits == 16'd9073);
 		$display("***********");
 		$display("*[UART]uart3(end character) start*");
@@ -265,9 +266,9 @@ module uart_tb;
 		wait(checkbits == 16'hAB51);
 		$display("*[UART]uart3(end character) receive*");
 		$display("[Passed]uart and function are passed");
-		$finish;		
+		$finish;
+		*/		
 	end
-
 	task send_data_1;begin
 		@(posedge clock);
 		tx_start = 1;

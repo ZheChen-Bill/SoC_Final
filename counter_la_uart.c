@@ -32,9 +32,7 @@ extern int uart_read();
 
 extern void check();
 
-extern void fir();
-extern void endflag_check();
-extern int  check_output(int index);
+extern int* fir();
 extern int* matmul();
 extern int* qsort();
 
@@ -165,21 +163,8 @@ void main()
 
 	//print("\n");
 	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
-	
-	//fir();
-	
-	//print("\n");
-	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
-	reg_mprj_datal = 0x003E << 16;
-	int* tmp = matmul();
-	reg_mprj_datal = *tmp << 16;
-	reg_mprj_datal = *(tmp+1) << 16;
-	reg_mprj_datal = *(tmp+2) << 16;
-	reg_mprj_datal = *(tmp+3) << 16;	
-	//print("\n");
-	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
-
-	tmp = qsort();
+	int* tmp = fir();
+	/*
 	reg_mprj_datal = *tmp << 16;
 	reg_mprj_datal = *(tmp+1) << 16;
 	reg_mprj_datal = *(tmp+2) << 16;
@@ -189,15 +174,37 @@ void main()
 	reg_mprj_datal = *(tmp+6) << 16;
 	reg_mprj_datal = *(tmp+7) << 16;
 	reg_mprj_datal = *(tmp+8) << 16;
-	reg_mprj_datal = *(tmp+9) << 16;	
-	
-	
-	endflag_check();
+	reg_mprj_datal = *(tmp+9) << 16;
+	reg_mprj_datal = *(tmp+10) << 16;	
+	*/
+	//print("\n");
+	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
 
-	for(int i=0; i<64;i=i+1){
-		reg_mprj_datal = (check_output(i)) << 16; 
-	}
-	
+	tmp = matmul();
+	/*
+	reg_mprj_datal = *tmp << 16;
+	reg_mprj_datal = *(tmp+1) << 16;
+	reg_mprj_datal = *(tmp+2) << 16;
+	reg_mprj_datal = *(tmp+3) << 16;	
+	*/
+	//print("\n");
+	//print("Monitor: Test 1 Passed\n\n");	// Makes simulation very long!
+
+	tmp = qsort();
+	/*
+	reg_mprj_datal = *tmp << 16;
+	reg_mprj_datal = *(tmp+1) << 16;
+	reg_mprj_datal = *(tmp+2) << 16;
+	reg_mprj_datal = *(tmp+3) << 16;
+	reg_mprj_datal = *(tmp+4) << 16;
+	reg_mprj_datal = *(tmp+5) << 16;
+	reg_mprj_datal = *(tmp+6) << 16;
+	reg_mprj_datal = *(tmp+7) << 16;
+	reg_mprj_datal = *(tmp+8) << 16;
+	*/
+	reg_mprj_datal = *(tmp+9) << 16;
+		
+
 	//check();
 	
 	reg_mprj_datal = 0xAB510000;

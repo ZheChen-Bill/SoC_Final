@@ -76,6 +76,15 @@ void __attribute__ ( ( section ( ".mprjram" ) ) ) ap_start() {
 	}
 }
 
+void __attribute__ ( ( section ( ".mprjram" ) ) ) input() {
+	write(input_address,reg_fir_x);
+
+}
+int __attribute__ ( ( section ( ".mprjram" ) ) ) output() {
+	reg_fir_y = read(output_address);
+	return reg_fir_y;
+}
+/*
 void __attribute__ ( ( section ( ".mprjram" ) ) ) start_DMA2() {
 	write(DMA2_address, output_base);
 	write(DMA2_length, data_length);
@@ -93,19 +102,31 @@ void __attribute__ ( ( section ( ".mprjram" ) ) ) endflag_check() {
 		}
 	}
 }
+*/
 int __attribute__ ( ( section ( ".mprjram" ) ) ) check_output(int index) {
-	reg_fir_y = read(output_base + 4*index);
+	reg_fir_y = read(input_base + 4*index);
 	return reg_fir_y;
 }
 
-void __attribute__ ( ( section ( ".mprjram" ) ) ) fir(){
+int* __attribute__ ( ( section ( ".mprjram" ) ) ) fir(){
 	initfir();
 
 	ap_start();
 
-	start_DMA2();
+	for(int register i=0;i<M;i=i+1){
+		reg_fir_x = inputsignal[i];
+
+		//check fir ready to receive data (bit[4] = 1), then write data;
+		input();
+
+		//check fir is valid for output data (bit[5] = 1), then read data;
+		outputsignal[i] = output();
+	}
 	
-	start_DMA1();
+//	start_DMA2();
+	
+//	start_DMA1();
+	return outputsignal;
 }
 
 
