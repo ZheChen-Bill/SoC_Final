@@ -13,6 +13,7 @@ extern char uart_write_char();
 extern int uart_write();
 
 extern void uart_end();
+extern void uart_start();
 
 void isr(void);
 
@@ -36,13 +37,15 @@ void isr(void)
 
     if ( irqs & (1 << USER_IRQ_0_INTERRUPT)) {
         user_irq_0_ev_pending_write(1); //Clear Interrupt Pending Event
+        uart_start();
+        /*
         buf = uart_read();
         if(buf == 0x0a){
             uart_end();
         }
         else
             uart_write(buf);
-
+        */
     }
 #endif
 

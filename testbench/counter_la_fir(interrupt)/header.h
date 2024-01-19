@@ -65,7 +65,7 @@ volatile OUTPUTDATA int outputsignal[M];
 //qsort
 #define SIZE_qsort 10
 int C[SIZE_qsort] = {893, 40, 3233, 4267, 2669, 2541, 9073, 6023, 5681, 4622};
-
+//uart
 int endflag = 0;
 int startflag = 0;
 #endif
