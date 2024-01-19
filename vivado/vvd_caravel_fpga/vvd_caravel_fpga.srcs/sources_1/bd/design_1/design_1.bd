@@ -2381,7 +2381,7 @@
           "xbar": {
             "vlnv": "xilinx.com:ip:axi_crossbar:2.1",
             "xci_name": "design_1_xbar_0",
-            "xci_path": "ip/design_1_xbar_0_1/design_1_xbar_0.xci",
+            "xci_path": "ip/design_1_xbar_0/design_1_xbar_0.xci",
             "inst_hier_path": "ps7_0_axi_periph/xbar",
             "parameters": {
               "NUM_MI": {
@@ -2459,7 +2459,7 @@
               "auto_pc": {
                 "vlnv": "xilinx.com:ip:axi_protocol_converter:2.1",
                 "xci_name": "design_1_auto_pc_1",
-                "xci_path": "ip/design_1_auto_pc_1_1/design_1_auto_pc_1.xci",
+                "xci_path": "ip/design_1_auto_pc_1/design_1_auto_pc_1.xci",
                 "inst_hier_path": "ps7_0_axi_periph/s00_couplers/auto_pc",
                 "parameters": {
                   "MI_PROTOCOL": {
@@ -2906,7 +2906,7 @@
       "read_romcode_0": {
         "vlnv": "xilinx.com:hls:read_romcode:0.0",
         "xci_name": "design_1_read_romcode_0_0",
-        "xci_path": "ip/design_1_read_romcode_0_0_1/design_1_read_romcode_0_0.xci",
+        "xci_path": "ip/design_1_read_romcode_0_0/design_1_read_romcode_0_0.xci",
         "inst_hier_path": "read_romcode_0",
         "interface_ports": {
           "m_axi_BUS0": {
