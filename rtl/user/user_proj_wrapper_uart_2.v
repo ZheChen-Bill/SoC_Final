@@ -218,7 +218,7 @@ module user_project_wrapper #(
     assign decode_to_mem         = (wbs_adr_i[31:0] >= 32'h38000000 && wbs_adr_i[31:0] < 32'h38004000)  ? 1 : 0;
     assign decode_to_axilite     = (wbs_adr_i[31:0] >= 32'h30000000 && wbs_adr_i[31:0] <= 32'h3000007F) ? 1 : 0; 
     assign decode_to_DMA1        = (wbs_adr_i[31:0] == 32'h30000080 || wbs_adr_i[31:0] == 32'h30000084) ? 1 : 0; 
-    assign decode_to_DMA2        = (wbs_adr_i[31:0] == 32'h30000088 || wbs_adr_i[31:0] == 32'h3000008C ) ? 1 : 0;
+    assign decode_to_DMA2        = (wbs_adr_i[31:0] == 32'h30000088 || wbs_adr_i[31:0] == 32'h3000008C || wbs_adr_i[31:0] == 32'h30000090 ) ? 1 : 0;
     assign decode_to_uart        = (wbs_adr_i[31:0] >  32'h30000090 && wbs_adr_i[31:0] < 32'h30100000)  ? 1 : 0; 
 
     //|| wbs_adr_i[31:0] == 32'h30000090
