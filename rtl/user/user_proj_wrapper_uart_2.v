@@ -362,39 +362,82 @@ module user_project_wrapper #(
     end
 
     //MUX for output of RAM (DMA1 or DMA2 or CPU)
+    reg [1:0]   ack_order; //01 for DMA2, 10 for DMA1, 11 for CPU
+    reg [1:0]   grant;
+    reg         wbs_ack_from_RAM_reg;
+    reg         wbs_stb_from_DMA1_reg;
+
     always @* begin
-        if(wbs_stb_from_DMA2) begin
-            wbs_ack_to_DMA1 = 1'b0;
-            wbs_dat_backto_DMA1 = 32'h0;
-            wbs_ack_to_DMA2 = wbs_ack_from_RAM;
-            wbs_dat_backto_DMA2 = wbs_dat_backfrom_RAM;
-            wbs_ack_o_mem = 1'b0;
-            wbs_dat_o_mem = 32'h0;
+        if(wbs_stb_from_DMA2)           grant = 2'b01;
+        else if(wbs_stb_from_DMA1)      grant = 2'b10;
+        else if(wbs_stb_to_mem)         grant = 2'b11;
+        else                            grant = 2'b00;
+    end
+    
+    always @(posedge clk) begin
+        if(rst)     wbs_ack_from_RAM_reg <= 1'b0;
+        else        wbs_ack_from_RAM_reg <= wbs_ack_from_RAM;
+    end
+    
+
+    always @(posedge clk) begin
+        if(rst)     wbs_stb_from_DMA1_reg <= 1'b0;
+        else        wbs_stb_from_DMA1_reg <= wbs_stb_from_DMA1;
+    end
+
+    always @(posedge clk) begin
+        if(rst)                                     ack_order <= 2'b00;
+        else if(grant == 2'b01)                     ack_order <= 2'b01;
+        else if(grant == 2'b10) begin
+            if(wbs_stb_to_mem) begin
+                if(wbs_ack_from_RAM_reg) begin
+                    if(!wbs_stb_from_DMA1_reg)          ack_order <= 2'b11;
+                    else                                ack_order <= 2'b10;
+                end
+                else                                ack_order <= ack_order;
+            end
+            else                                    ack_order <= 2'b10;
         end
-        else if(wbs_stb_from_DMA1) begin
-            wbs_ack_to_DMA1 = wbs_ack_from_RAM;
-            wbs_dat_backto_DMA1 = wbs_dat_backfrom_RAM;
-            wbs_ack_to_DMA2 = 1'b0;
-            wbs_dat_backto_DMA2 = 32'h0;
-            wbs_ack_o_mem = 1'b0;
-            wbs_dat_o_mem = 32'h0;
-        end
-        else if(wbs_stb_to_mem) begin
-            wbs_ack_to_DMA1 = 1'b0;
-            wbs_dat_backto_DMA1 = 32'h0;
-            wbs_ack_to_DMA2 = 1'b0;
-            wbs_dat_backto_DMA2 = 32'h0;
-            wbs_ack_o_mem = wbs_ack_from_RAM;
-            wbs_dat_o_mem = wbs_dat_backfrom_RAM;
-        end
-        else begin
-            wbs_ack_to_DMA1 = 1'b0;
-            wbs_dat_backto_DMA1 = 32'h0;
-            wbs_ack_to_DMA2 = 1'b0;
-            wbs_dat_backto_DMA2 = 32'h0;
-            wbs_ack_o_mem = 1'b0;
-            wbs_dat_o_mem = 32'h0;
-        end
+        else if(grant == 2'b11)                     ack_order <= 2'b11;
+        else                                        ack_order <= 2'b00;
+    end
+
+
+    always @* begin
+        case(ack_order)
+            2'b01: begin
+                wbs_ack_to_DMA1 = 1'b0;
+                wbs_dat_backto_DMA1 = 32'h0;
+                wbs_ack_to_DMA2 = wbs_ack_from_RAM;
+                wbs_dat_backto_DMA2 = wbs_dat_backfrom_RAM;
+                wbs_ack_o_mem = 1'b0;
+                wbs_dat_o_mem = 32'h0;
+            end
+            2'b10: begin
+                wbs_ack_to_DMA1 = wbs_ack_from_RAM;
+                wbs_dat_backto_DMA1 = wbs_dat_backfrom_RAM;
+                wbs_ack_to_DMA2 = 1'b0;
+                wbs_dat_backto_DMA2 = 32'h0;
+                wbs_ack_o_mem = 1'b0;
+                wbs_dat_o_mem = 32'h0;
+            end
+            2'b11: begin
+                wbs_ack_to_DMA1 = 1'b0;
+                wbs_dat_backto_DMA1 = 32'h0;
+                wbs_ack_to_DMA2 = 1'b0;
+                wbs_dat_backto_DMA2 = 32'h0;
+                wbs_ack_o_mem = wbs_ack_from_RAM;
+                wbs_dat_o_mem = wbs_dat_backfrom_RAM;
+            end
+            2'b00: begin
+                wbs_ack_to_DMA1 = 1'b0;
+                wbs_dat_backto_DMA1 = 32'h0;
+                wbs_ack_to_DMA2 = 1'b0;
+                wbs_dat_backto_DMA2 = 32'h0;
+                wbs_ack_o_mem = 1'b0;
+                wbs_dat_o_mem = 32'h0;
+            end
+        endcase
     end
 
 
