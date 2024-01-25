@@ -46,7 +46,7 @@ module DMA2 #(
     reg [31:0] length_cnt;
     reg [31:0] wbs_dat_from_FIR_reg;
     wire [1:0] valid_setup;
-    wire [31:0] endflag;
+    reg [31:0] endflag;
 
 
     /*
@@ -112,7 +112,14 @@ module DMA2 #(
             length_cnt <= length_cnt;
     end
 
-    assign endflag = ((length_cnt + 32'b1) == data_length && wbs_ack_from_RAM)? 32'b1 : 32'b0;
+    always @* begin
+        if(rst)                                                         endflag = 32'b0;
+        else if((length_cnt + 32'b1) == data_length)                    endflag = 32'b1;
+        else if(endflag == 32'b1 && wbs_adr_from_CPU == 32'h30000090)   endflag = 32'b0;
+        else                                                            endflag = endflag;
+    end
+    //assign endflag = ((length_cnt + 32'b1) == data_length)? 32'b1 : 32'b0;
+
     assign valid_setup = (wbs_adr_from_CPU == 32'h30000088 && wbs_stb_from_CPU )? 2'b01 :
                         (wbs_adr_from_CPU == 32'h3000008C && wbs_stb_from_CPU )? 2'b10 : 2'b00;
     
